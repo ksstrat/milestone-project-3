@@ -55,7 +55,6 @@ class Game:
         Sets up the computer's board by placing its ships randomly
         """
         self._place_ships_randomly(self.computer_fleet, self.computer_board)
-        print("Enemy ships are in range!")
 
 
     def _parse_coordinate_input(self, coord_str):
