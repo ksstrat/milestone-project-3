@@ -56,12 +56,12 @@ class Board:
             if not (0 <= r_coord < self.size and 0 <= c_coord < self.size):
                 print("Error: Ship placement is outside of the playboard!")
                 return False
-            
+
         for r_coord, c_coord in coordinates:
             if self.grid[r_coord][c_coord] != '~':
                 print("Error: Ship overlaps with another!")
                 return False
-        
+
         for r_coord, c_coord in coordinates:
             self.grid[r_coord][c_coord] = 'S'
 
@@ -72,7 +72,7 @@ class Board:
 
 if __name__ == '__main__':
     test_board = Board()
-    
+
     # Test Ship
     submarine = Ship("TestSub", 3)
     patrol = Ship("TestPatrol", 2)

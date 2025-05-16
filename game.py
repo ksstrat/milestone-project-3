@@ -52,7 +52,7 @@ class Game:
                     max_row = board_size - ship.size
                     start_row = random.randint(0, max_row if max_row >=0 else 0)
                     start_col = random.randint(0, board_size - 1)
-                
+
                 placed_successfully = target_board.place_ship(ship, start_row, start_col, orientation)
 
 
