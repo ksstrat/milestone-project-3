@@ -87,6 +87,7 @@ class Game:
 
         return (row_index, col_index)
 
+
     def _manually_place_ship(self, ship_to_place):
         """
         Handles the input process for manually placing a ship.
@@ -128,6 +129,40 @@ class Game:
                 print(f"{ship_to_place.name} has received command!")
             else:
                 print(f"{ship_to_place.name} did not understand the command. Please try again!")
+
+
+    def _computer_take_shot(self):
+        """
+        Handles the computer's turn to take a shot.
+        Chooses a random coordinate on the player's board.
+        Processes the shot and provides feedback.
+        """
+        print(f"\n--- Enemy's Turn ---")
+        board_size = self.player_board.size
+        valid_shot_found = False
+        shot_row, shot_col = -1, -1
+
+        while not valid_shot_found:
+            shot_row = random.randint(0, board_size - 1)
+            shot_col = random.randint(0, board_size - 1)
+            if self.player_board.grid[shot_row][shot_col] not in ['x', 'o']:
+                valid_shot_found = True
+
+        coord_display_str = f"{self.player_board.row_labels[shot_row]}{self.player_board.col_labels[shot_col]}"
+        print(f"Enemy fires at {coord_display_str}...")
+
+        shot_result_on_grid = self.player_board.receive_shot(shot_row, shot_col)
+
+        if shot_result_on_grid == "hit":
+            print("> Enemy HIT your ship! <")
+            for player_ship in self.player_fleet:
+                if (shot_row, shot_col) in player_ship.coordinates:
+                    player_ship.take_hit()
+                    if player_ship.is_sunk:
+                        print(f"!!! Enemy sank your {player_ship.name} !!!")
+                    break
+        elif shot_result_on_grid == "miss":
+            print("> Enemy MISSED! <")
 
 
     def show_start_screen(self):
@@ -295,14 +330,16 @@ class Game:
                                 break
                     elif shot_result_on_grid == "miss":
                         print("> MISS! <")
-                    else:
-                        print("An unexpected error occurred with your shot.")
 
-                    # Here will follow computers turn
+
+                    if game_is_running:
+                        self._computer_take_shot()
+                        print("\nYour fleet after enemy's shot:")
+                        self.player_board.display()
+
                     # Here will be checked who whins
 
-                    
-                    print("\n(Game round ends here for now after player's shot)")
+                    print("\n(Game round ends here for now after player's and enemy's shot)")
                     game_is_running = False
 
                 print("\n--- Game Over ---")
