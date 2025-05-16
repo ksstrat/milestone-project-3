@@ -1,4 +1,5 @@
 from board import Board
+from ship import Ship
 
 class Game:
     """
@@ -14,8 +15,18 @@ class Game:
         self.player_board = Board()
         self.computer_board = Board()
 
+        self.player_fleet = []
+        self.computer_fleet = []
+
+        for name, size in Ship.ALL_SHIPS.items():
+            self.player_fleet.append(Ship(name,size))
+            self.computer_fleet.append(Ship(name, size))
+
         # Testprint
-        print("Game initialized with player and computer boards.")
+        print(f"Game initialized with. Player hast {len(self.player_fleet)} ships. Computer has {len(self.computer_fleet)} ships.")
+        if self.player_fleet:
+            first_player_ship = self.player_fleet[0]
+            print(f"First player ship: {first_player_ship.name}, Size: {first_player_ship.size}")
 
 
     def show_start_screen(self):
@@ -108,6 +119,8 @@ class Game:
                 print(f"Game will start for {self.player_name} with {self.ship_placement_method} placement.")
                 # Testprint
                 print(f"Player board size: {self.player_board.size}x{self.player_board.size}")
+                if self.player_fleet:
+                    print(f"First ship is {self.player_fleet[0].name} of size {self.player_fleet[0].size}")
                 # Implement actual game start here in the future!
                 break
             elif choice == 'r':
