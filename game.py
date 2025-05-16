@@ -2,6 +2,7 @@ from board import Board
 from ship import Ship
 import random
 
+
 class Game:
     """
     Manages the overall Battleship game flow, including setup, turns, and game state.
@@ -25,6 +26,7 @@ class Game:
 
         self._setup_computer_board()
 
+        self.current_player = "player"
 
     def _place_ships_randomly(self, fleet_to_place, target_board):
         """
@@ -49,13 +51,11 @@ class Game:
 
                 placed_successfully = target_board.place_ship(ship, start_row, start_col, orientation)
 
-
     def _setup_computer_board(self):
         """
         Sets up the computer's board by placing its ships randomly
         """
         self._place_ships_randomly(self.computer_fleet, self.computer_board)
-
 
     def _parse_coordinate_input(self, coord_str):
         """
@@ -85,7 +85,6 @@ class Game:
             return None
 
         return (row_index, col_index)
-
 
     def _manually_place_ship(self, ship_to_place):
         """
@@ -129,14 +128,13 @@ class Game:
             else:
                 print(f"{ship_to_place.name} did not understand the command. Please try again!")
 
-
     def _computer_take_shot(self):
         """
         Handles the computer's turn to take a shot.
         Chooses a random coordinate on the player's board.
         Processes the shot and provides feedback.
         """
-        print(f"\n--- Enemy's Turn ---")
+        print("\n--- Enemy's Turn ---")
         board_size = self.player_board.size
         valid_shot_found = False
         shot_row, shot_col = -1, -1
@@ -163,7 +161,6 @@ class Game:
         elif shot_result_on_grid == "miss":
             print("> Enemy MISSED! <")
 
-
     def show_start_screen(self):
         """
         Displays the start screen and gets the user's initial choice.
@@ -184,7 +181,6 @@ class Game:
             else:
                 print("Invalid choice. Please enter 's', 'r', or 'q'.")
 
-
     def get_player_name(self):
         """
         Prompts the user to enter their name.
@@ -197,7 +193,6 @@ class Game:
                 break
             else:
                 print("Name cannot be empty. Please enter your name.")
-
 
     def get_ship_placement_choice(self):
         """
@@ -220,7 +215,6 @@ class Game:
             else:
                 print("Invalid choice. Please enter 'm' or 'r'.")
 
-
     def show_rules(self):
         """
         Displays the game rules.
@@ -238,7 +232,6 @@ class Game:
         print("8. The first player to sink all of the opponent's ships wins.")
         print("--- End of Rules ---")
         input("\nPress Enter to return to the menu...")
-
 
     def _get_player_shot_coordinate(self):
         """
@@ -261,7 +254,6 @@ class Game:
                     return parsed_coords
             else:
                 print("Invalid input. Please use a letter (A-J) followed by a number (1-10).")
-
 
     def run_game(self):
         """
@@ -303,43 +295,42 @@ class Game:
                 game_is_running = True
 
                 while game_is_running:
-                    print(f"\n------- Captain {self.player_name}'s Turn -------")
-
-                    print("\nOur Status:")
-                    self.player_board.display()
-
-                    print("\nRadar View:")
-                    self.computer_board.display_radar_view()
-
-                    shot_coords = self._get_player_shot_coordinate()
-
-                    r, c = shot_coords
-                    coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
-                    print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
-
-                    shot_result_on_grid = self.computer_board.receive_shot(r, c)
-
-                    if shot_result_on_grid == "hit":
-                        print("> HIT! <")
-                        for comp_ship in self.computer_fleet:
-                            if (r, c) in comp_ship.coordinates:
-                                comp_ship.take_hit()
-                                if comp_ship.is_sunk:
-                                    print(f"! Enemy {comp_ship.name} has been sunk !")
-                                break
-                    elif shot_result_on_grid == "miss":
-                        print("> MISS! <")
-
-
-                    if game_is_running:
-                        self._computer_take_shot()
-                        print("\nYour fleet after enemy's shot:")
+                    if self.current_player == "player":
+                        print(f"\n------- Captain {self.player_name}'s Turn -------")
+                        print("\nOur Status:")
                         self.player_board.display()
+                        print("\nRadar View:")
+                        self.computer_board.display_radar_view()
+
+                        shot_coords = self._get_player_shot_coordinate()
+                        r, c = shot_coords
+                        coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
+                        print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
+
+                        shot_result_on_grid = self.computer_board.receive_shot(r, c)
+                        if shot_result_on_grid == "hit":
+                            print("> HIT! <")
+                            for comp_ship in self.computer_fleet:
+                                if (r, c) in comp_ship.coordinates:
+                                    comp_ship.take_hit()
+                                    if comp_ship.is_sunk:
+                                        print(f"! Enemy {comp_ship.name} has been sunk !")
+                                    break
+                        elif shot_result_on_grid == "miss":
+                            print("> MISS! <")
+
+                        if game_is_running:
+                            self.current_player = "computer"
+
+                    elif self.current_player == "computer":
+                        self._computer_take_shot()
+
+                        if game_is_running:
+                            self.current_player = "player"
 
                     # Here will be checked who whins
-
-                    print("\n(Game round ends here for now after player's and enemy's shot)")
-                    game_is_running = False
+                    # For the moment, this game wont end,
+                    # because winning condition is missing.
 
                 print("\n--- Game Over ---")
                 continue
