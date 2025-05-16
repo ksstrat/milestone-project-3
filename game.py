@@ -92,8 +92,12 @@ class Game:
         Handles the input process for manually placing a ship.
         Focuses on getting and validating input.
         """
-        print(f"\nPlacing your {ship_to_place.name} (Size: {ship_to_place.size}).")
-        self.player_board.display()
+        print(f"\nCommand your {ship_to_place.name} (Size: {ship_to_place.size}).")
+
+        placed_on_board_successfully = False
+        while not placed_on_board_successfully:
+            print("Current state:")
+            self.player_board.display()
 
         start_row, start_col, orientation_input = -1, -1, ''
 
@@ -121,9 +125,9 @@ class Game:
         )
 
         if placed_on_board_successfully:
-            print(f"{ship_to_place.name} placed successfully!")
+            print(f"{ship_to_place.name} has received command!")
         else:
-            print(f"Colud not place {ship_to_place.name} there. Please try again!")
+            print(f"{ship_to_place.name} did not understand the command. Please try again!")
 
 
     def show_start_screen(self):
@@ -227,39 +231,64 @@ class Game:
 
     def run_game(self):
         """
-        Main method to run the game.
+        Main method to manage the overall game flow.
+        Starts with the main menu and proceeds to game setup and play if chosen by the player.
+        The game loop allows the layer to take one shot before currently ending.
         """
         while True:
-            choice = self.show_start_screen()
+            menu_choice = self.show_start_screen()
 
-            if choice == 's':
+            if menu_choice == 'q':
+                print("Thanks for playing Battleship! Have a nice day!")
+                break
+
+            elif menu_choice == 'r':
+                self.show_rules()
+                continue
+
+            elif menu_choice == "s":
                 self.get_player_name()
                 self.get_ship_placement_choice()
-                print("\nStarting game setup...")
-                print(f"Game will start for {self.player_name} with {self.ship_placement_method} placement.")
 
+                print("\nOur ships prepare for depature...")
                 if self.ship_placement_method == "random":
-                    print("Placing ships randomly...")
+                    print("\nOur ships will spread without a strategy!")
                     self._place_ships_randomly(self.player_fleet, self.player_board)
-                    print("Your ships have been placed randomly.")
-                    print("\nThis is your board:")
+                    print("Our ships have taken up random positions")
+                    print("\nThis is our nautical chart:")
                     self.player_board.display()
                 else:
-                    print("\nManual ship placement selected.")
+                    print("\n--- Decide Ship Positioning ---")
                     for player_ship in self.player_fleet:
                         self._manually_place_ship(player_ship)
-                    print("\nAll your ships have been placed!")
-                    print("Your board:")
+                    print("\nAll ships in position!")
+                    print("This is our nautical chart:")
                     self.player_board.display()
 
-                # Implement main game loop pending
-                break
-            elif choice == 'r':
-                self.show_rules()
+                print("\n--- Enemy in Range! ---")
+                game_is_running = True
 
-            elif choice == 'q':
-                print("Thanks for playing Battleship! Goodbye.")
-                break
+                while game_is_running:
+                    print(f"\n------- Captain {self.player_name}'s Turn -------")
+
+                    print("\nOur Status:")
+                    self.player_board.display()
+
+                    print("\nRadar View:")
+                    self.computer_board.display_radar_view()
+
+                    shot_coords = self._get_player_shot_coordinate()
+
+                    r, c = shot_coords
+                    coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
+                    print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
+
+                    # Here will follow the shot evaluation
+                    # Here will follow computers turn
+                    # Here will be checked who whins
+
+                print("\n--- Game Over ---")
+                continue
 
 
 # Main Game execution
