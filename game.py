@@ -1,3 +1,5 @@
+from board import Board
+
 class Game:
     """
     Manages the overall Battleship game flow, including setup, turns, and game state.
@@ -8,6 +10,12 @@ class Game:
         """
         self.player_name = "Player"
         self.ship_placement_method = "random"
+
+        self.player_board = Board()
+        self.computer_board = Board()
+
+        # Testprint
+        print("Game initialized with player and computer boards.")
 
 
     def show_start_screen(self):
@@ -98,6 +106,8 @@ class Game:
                 self.get_ship_placement_choice()
                 print("\nStarting game setup...")
                 print(f"Game will start for {self.player_name} with {self.ship_placement_method} placement.")
+                # Testprint
+                print(f"Player board size: {self.player_board.size}x{self.player_board.size}")
                 # Implement actual game start here in the future!
                 break
             elif choice == 'r':
