@@ -20,14 +20,8 @@ class Game:
         self.computer_fleet = []
 
         for name, size in Ship.ALL_SHIPS.items():
-            self.player_fleet.append(Ship(name,size))
+            self.player_fleet.append(Ship(name, size))
             self.computer_fleet.append(Ship(name, size))
-
-        # Testprint
-        # print(f"Game initialized with. Player hast {len(self.player_fleet)} ships. Computer has {len(self.computer_fleet)} ships.")
-        # if self.player_fleet:
-        #     first_player_ship = self.player_fleet[0]
-        #     print(f"First player ship: {first_player_ship.name}, Size: {first_player_ship.size}")
 
         self._setup_computer_board()
 
@@ -44,13 +38,13 @@ class Game:
             while not placed_successfully:
                 orientation = random.choice(['h', 'v'])
 
-                if orientation =='h':
+                if orientation == 'h':
                     max_col = board_size - ship.size
-                    start_row = random.randint(0, board_size -1)
-                    start_col = random.randint(0, max_col if max_col >=0 else 0)
+                    start_row = random.randint(0, board_size - 1)
+                    start_col = random.randint(0, max_col if max_col >= 0 else 0)
                 else:
                     max_row = board_size - ship.size
-                    start_row = random.randint(0, max_row if max_row >=0 else 0)
+                    start_row = random.randint(0, max_row if max_row >= 0 else 0)
                     start_col = random.randint(0, board_size - 1)
 
                 placed_successfully = target_board.place_ship(ship, start_row, start_col, orientation)
@@ -96,11 +90,11 @@ class Game:
                 print(f"Welcome, {self.player_name}!")
                 break
             else:
-                print("Name connot be empty. Please enter your name.")
+                print("Name cannot be empty. Please enter your name.")
 
     def get_ship_placement_choice(self):
         """
-        Asks the player how they went to place their ships.
+        Asks the player how they want to place their ships.
         """
         print("\nShip Placement:")
         print(" (m) Manually place your ships")
