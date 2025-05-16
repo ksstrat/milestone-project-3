@@ -1,5 +1,6 @@
 from board import Board
 from ship import Ship
+import random
 
 class Game:
     """
@@ -23,10 +24,44 @@ class Game:
             self.computer_fleet.append(Ship(name, size))
 
         # Testprint
-        print(f"Game initialized with. Player hast {len(self.player_fleet)} ships. Computer has {len(self.computer_fleet)} ships.")
-        if self.player_fleet:
-            first_player_ship = self.player_fleet[0]
-            print(f"First player ship: {first_player_ship.name}, Size: {first_player_ship.size}")
+        # print(f"Game initialized with. Player hast {len(self.player_fleet)} ships. Computer has {len(self.computer_fleet)} ships.")
+        # if self.player_fleet:
+        #     first_player_ship = self.player_fleet[0]
+        #     print(f"First player ship: {first_player_ship.name}, Size: {first_player_ship.size}")
+
+        self._setup_computer_board()
+
+
+    def _place_ships_randomly(self, fleet_to_place, target_board):
+        """
+        Places all ship from the given fleet randomly on the target board.
+        Ensures ships are placed according to board rules.
+        """
+        board_size = target_board.size
+
+        for ship in fleet_to_place:
+            placed_successfully = False
+            while not placed_successfully:
+                orientation = random.choice(['h', 'v'])
+
+                if orientation =='h':
+                    max_col = board_size - ship.size
+                    start_row = random.randint(0, board_size -1)
+                    start_col = random.randint(0, max_col if max_col >=0 else 0)
+                else:
+                    max_row = board_size - ship.size
+                    start_row = random.randint(0, max_row if max_row >=0 else 0)
+                    start_col = random.randint(0, board_size - 1)
+                
+                placed_successfully = target_board.place_ship(ship, start_row, start_col, orientation)
+
+
+    def _setup_computer_board(self):
+        """
+        Sets up the computer's board by placing its ships randomly
+        """
+        self._place_ships_randomly(self.computer_fleet, self.computer_board)
+        print("Enemy ships are in range!")
 
 
     def show_start_screen(self):
@@ -97,7 +132,7 @@ class Game:
         print("   - Destroyer (3 squares)")
         print("   - Submarine (3 squares)")
         print("   - Patrol Boat (2 squares)")
-        print("4. Ships can be placed horizontally or vertically, but cannot touch each other.")
+        print("4. Ships can be placed horizontally or vertically, but can not overlap.")
         print("5. Players take turns guessing coordinates to hit enemy ships.")
         print("6. A hit is marked 'H' (on your tracking grid) or 'X' (on your own ship).")
         print("7. A miss is marked 'M' (on your tracking grid) or 'O' (opponent's miss on your water).")
