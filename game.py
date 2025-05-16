@@ -99,35 +99,35 @@ class Game:
             print("Current state:")
             self.player_board.display()
 
-        start_row, start_col, orientation_input = -1, -1, ''
+            start_row, start_col, orientation_input = -1, -1, ''
 
-        while True:
-            coord_input = input(f"Enter start coordinate (e.g., A1, J10) for your {ship_to_place.name}: ").strip()
-            if not coord_input:
-                print("Input cannot be empty.")
-                continue
-            parsed_coords = self._parse_coordinate_input(coord_input)
-            if parsed_coords:
-                start_row, start_col = parsed_coords
-                break
+            while True:
+                coord_input = input(f"Enter start coordinate (e.g., A1, J10) for your {ship_to_place.name}: ").strip()
+                if not coord_input:
+                    print("Input cannot be empty.")
+                    continue
+                parsed_coords = self._parse_coordinate_input(coord_input)
+                if parsed_coords:
+                    start_row, start_col = parsed_coords
+                    break
+                else:
+                    print("Invalid coordinate format. Please use a letter (A-J) followed by a number (1-10).")
+
+            while True:
+                orientation_input = input(f"Enter orientation for {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
+                if orientation_input in ['h', 'v']:
+                    break
+                else:
+                    print("Invalid orientation. Please enter 'h' or 'v'.")
+
+            placed_on_board_successfully = self.player_board.place_ship(
+                ship_to_place, start_row, start_col, orientation_input
+            )
+
+            if placed_on_board_successfully:
+                print(f"{ship_to_place.name} has received command!")
             else:
-                print("Invalid coordinate format. Please use a letter (A-J) followed by a number (1-10).")
-
-        while True:
-            orientation_input = input(f"Enter orientation for {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
-            if orientation_input in ['h', 'v']:
-                break
-            else:
-                print("Invalid orientation. Please enter 'h' or 'v'.")
-
-        placed_on_board_successfully = self.player_board.place_ship(
-            ship_to_place, start_row, start_col, orientation_input
-        )
-
-        if placed_on_board_successfully:
-            print(f"{ship_to_place.name} has received command!")
-        else:
-            print(f"{ship_to_place.name} did not understand the command. Please try again!")
+                print(f"{ship_to_place.name} did not understand the command. Please try again!")
 
 
     def show_start_screen(self):
@@ -212,7 +212,7 @@ class Game:
         Checks if the coordinate has already been targeted.
         """
         while True:
-            coord_input = input(f"\n{self.player_name}, where should we shoot?")
+            coord_input = input(f"\n{self.player_name}, where should we shoot? We need coordinates! (e.g., B6)")
             if not coord_input:
                 print("Invalid input. Please try again.")
                 continue
@@ -226,7 +226,7 @@ class Game:
                 else:
                     return parsed_coords
             else:
-                print("Invalid input. Please use a latter (A-J) followed by a number (1-10).")
+                print("Invalid input. Please use a letter (A-J) followed by a number (1-10).")
 
 
     def run_game(self):
@@ -286,6 +286,8 @@ class Game:
                     # Here will follow the shot evaluation
                     # Here will follow computers turn
                     # Here will be checked who whins
+                    print("\n(Game round ends here for now after player's shot)")
+                    game_is_running = False
 
                 print("\n--- Game Over ---")
                 continue
