@@ -146,11 +146,23 @@ class Game:
                 self.get_ship_placement_choice()
                 print("\nStarting game setup...")
                 print(f"Game will start for {self.player_name} with {self.ship_placement_method} placement.")
+
                 # Testprint
                 print(f"Player board size: {self.player_board.size}x{self.player_board.size}")
-                if self.player_fleet:
-                    print(f"First ship is {self.player_fleet[0].name} of size {self.player_fleet[0].size}")
-                # Implement actual game start here in the future!
+
+                if self.ship_placement_method == "random":
+                    print("Placing ships randomly...")
+                    self._place_ships_randomly(self.player_fleet, self.player_board)
+                    print("Your ships have been placed randomly.")
+                    print("\nThis is your board:")
+                    self.player_board.display()
+                else:
+                    print("\nManual ship placement selected.")
+                    # Implement manual placement pending
+                    print("Your board:")
+                    self.player_board.display()
+
+                # Implement main game loop pending
                 break
             elif choice == 'r':
                 self.show_rules()
