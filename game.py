@@ -104,7 +104,7 @@ class Game:
             choice = input("Choose ship placement method (m/r): ").lower()
             if choice == 'm':
                 self.ship_placement_method = "manual"
-                print("Ships will be placed randomly.")
+                print("You will place your ships manually!")
                 break
             elif choice == 'r':
                 self.ship_placement_method = "random"
