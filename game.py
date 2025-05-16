@@ -58,6 +58,68 @@ class Game:
         print("Enemy ships are in range!")
 
 
+    def _parse_coordinate_input(self, coord_str):
+        """
+        Parses a string like "A5" into (row, col) tuple.
+        Returns None if input is invalid.
+        """
+        coord_str = coord_str.strip().upper()
+        if not (2 <= len(coord_str) <= 3):
+            return None
+
+        row_char = coord_str[0]
+        col_str = coord_str[1:]
+
+        if not row_char.isalpha() or not col_str.isdigit():
+            return None
+
+        if row_char not in self.player_board.row_labels:
+            return None
+        row_index = self.player_board.row_labels.find(row_char)
+
+        try:
+            col_num = int(col_str)
+            if not (1 <= col_num <= self.player_board.size):
+                return None
+            col_index = col_num - 1
+        except ValueError:
+            return None
+
+        return (row_index, col_index)
+
+    def _manually_place_ship(self, ship_to_place):
+        """
+        Handles the input process for manually placing a ship.
+        Focuses on getting and validating input.
+        """
+        print(f"\nPlacing your {ship_to_place.name} (Size: {ship_to_place.size}).")
+        self.player_board.display()
+
+        start_row, start_col, orientation_input = -1, -1, ''
+
+        while True:
+            coord_input = input(f"Enter start coordinate (e.g., A1, J10) for your {ship_to_place.name}: ").strip()
+            if not coord_input:
+                print("Input cannot be empty.")
+                continue
+            parsed_coords = self._parse_coordinate_input(coord_input)
+            if parsed_coords:
+                start_row, start_col = parsed_coords
+                break
+            else:
+                print("Invalid coordinate format. Please use a letter (A-J) followed by a number (1-10).")
+
+        while True:
+            orientation_input = input(f"Enter orientation for {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
+            if orientation_input in ['h', 'v']:
+                break
+            else:
+                print("Invalid orientation. Please enter 'h' or 'v'.")
+
+        print(f"DEBUG: Input for {ship_to_place.name}: Start at ({start_row},{start_col}), Orientation: {orientation_input.upper()}")
+        return start_row, start_col, orientation_input
+
+
     def show_start_screen(self):
         """
         Displays the start screen and gets the user's initial choice.
@@ -92,6 +154,7 @@ class Game:
             else:
                 print("Name cannot be empty. Please enter your name.")
 
+
     def get_ship_placement_choice(self):
         """
         Asks the player how they want to place their ships.
@@ -113,6 +176,7 @@ class Game:
             else:
                 print("Invalid choice. Please enter 'm' or 'r'.")
 
+
     def show_rules(self):
         """
         Displays the game rules.
@@ -131,6 +195,7 @@ class Game:
         print("--- End of Rules ---")
         input("\nPress Enter to return to the menu...")
 
+
     def run_game(self):
         """
         Main method to run the game.
@@ -144,9 +209,6 @@ class Game:
                 print("\nStarting game setup...")
                 print(f"Game will start for {self.player_name} with {self.ship_placement_method} placement.")
 
-                # Testprint
-                print(f"Player board size: {self.player_board.size}x{self.player_board.size}")
-
                 if self.ship_placement_method == "random":
                     print("Placing ships randomly...")
                     self._place_ships_randomly(self.player_fleet, self.player_board)
@@ -155,9 +217,20 @@ class Game:
                     self.player_board.display()
                 else:
                     print("\nManual ship placement selected.")
-                    # Implement manual placement pending
-                    print("Your board:")
-                    self.player_board.display()
+                    all_player_ships_input_gathered = True
+                    for player_ship in self.player_fleet:
+                        placement_details = self._manually_place_ship(player_ship)
+                        if placement_details is None:
+                            print(f"Input for {player_ship.name} could not be completed")
+                            all_player_ships_input_gathered = False
+                            break
+
+                    if all_player_ships_input_gathered:
+                        print("\nAll ships placement data gathered.")
+                        print("Your board:")
+                        self.player_board.display()
+                    else:
+                        print("Manual placement was not completed")
 
                 # Implement main game loop pending
                 break
