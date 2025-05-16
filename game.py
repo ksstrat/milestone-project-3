@@ -121,11 +121,8 @@ class Game:
         print("1. This is a 1-player game against the computer.")
         print("2. The game is played on a 10x10 grid.")
         print("3. Each player has a fleet of 5 ships of different sizes:")
-        print("   - Carrier (5 squares)")
-        print("   - Battleship (4 squares)")
-        print("   - Destroyer (3 squares)")
-        print("   - Submarine (3 squares)")
-        print("   - Patrol Boat (2 squares)")
+        for name, size in Ship.ALL_SHIPS.items():
+            print(f" - {name} ({size} squares)")
         print("4. Ships can be placed horizontally or vertically, but can not overlap.")
         print("5. Players take turns guessing coordinates to hit enemy ships.")
         print("6. A hit is marked 'H' (on your tracking grid) or 'X' (on your own ship).")
