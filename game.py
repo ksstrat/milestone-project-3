@@ -106,6 +106,7 @@ class Game:
                 print("Thanks for playing Battleship! Goodbye.")
                 break
 
+
 # Main Game execution
 if __name__ == '__main__':
     game = Game()
