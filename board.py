@@ -1,6 +1,3 @@
-from ship import Ship
-
-
 class Board:
     """
     Represents the 10x10 game board for Battleship.
@@ -47,7 +44,7 @@ class Board:
         for i in range(self.size):
             row_label = self.row_labels[i]
             row_display_elements = []
-            for cell_value in self.grid [i]:
+            for cell_value in self.grid[i]:
                 if cell_value == 'S':
                     row_display_elements.append('~')
                 else:
@@ -92,7 +89,7 @@ class Board:
         ship_to_place.set_coordinates(coordinates)
 
         return True
-    
+
 
     def receive_shot(self, row, col):
         """
@@ -102,7 +99,7 @@ class Board:
         if not (0 <= row < self.size and 0 <= col < self.size):
             print("DEBUG: Shot out of bounds in receive_shot - should not happen if input is validated.")
             return None
-        
+
         current_cell_value = self.grid[row][col]
 
         if current_cell_value == 'S':
