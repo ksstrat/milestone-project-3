@@ -202,6 +202,29 @@ class Game:
         input("\nPress Enter to return to the menu...")
 
 
+    def _get_player_shot_coordinate(self):
+        """
+        Prompts the player for a shot coordinate.
+        Checks if the coordinate has already been targeted.
+        """
+        while True:
+            coord_input = input(f"\n{self.player_name}, where should we shoot?")
+            if not coord_input:
+                print("Invalid input. Please try again.")
+                continue
+
+            parsed_coords = self._parse_coordinate_input(coord_input)
+            if parsed_coords:
+                row, col = parsed_coords
+                if self.computer_board.grid[row][col] == 'x' or self.computer_board.grid[row][col] == 'o':
+                    print("We have already fired at this coordinate! Please try again.")
+                    continue
+                else:
+                    return parsed_coords
+            else:
+                print("Invalid input. Please use a latter (A-J) followed by a number (1-10).")
+
+
     def run_game(self):
         """
         Main method to run the game.
@@ -233,6 +256,7 @@ class Game:
                 break
             elif choice == 'r':
                 self.show_rules()
+
             elif choice == 'q':
                 print("Thanks for playing Battleship! Goodbye.")
                 break
