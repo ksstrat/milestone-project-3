@@ -21,7 +21,7 @@ class Ship:
         self.size = size
         self.hits = 0
         self.is_sunk = False
-        # self.coordinates = [] # Used later to store the ships position
+        self.coordinates = []
 
 
     def take_hit(self):
@@ -33,18 +33,25 @@ class Ship:
             if self.hits >= self.size:
                 self.is_sunk = True
 
+    def set_coordinates(self, new_coordinates):
+        """
+        Sets the ship's coordinates.
+        """
+        self.coordinates = new_coordinates
+
 
 # Testing
 if __name__ == '__main__':
         print("Ship module test:")
         print("Available ship configurations:", Ship.ALL_SHIPS)
 
-        test_ship = Ship("Test Dinghy", 1)
+        # Test Coordinates
+        test_ship = Ship("Test Ship", 3)
+        print(f"Ship created: {test_ship.name}, Size: {test_ship.size}, Coordinates: {test_ship.coordinates}")
+
+        test_coords = [(0, 0), (0, 1), (0, 2)]
+        test_ship.set_coordinates(test_coords)
+        print(f"After set coords: {test_ship.name}, Coords: {test_ship.coordinates}")
+
         test_ship.take_hit()
         print(f"{test_ship.name} - Hits: {test_ship.hits}, Sunk: {test_ship.is_sunk}")
-
-
-        if "Carrier" in Ship.ALL_SHIPS:
-            carrier_size = Ship.ALL_SHIPS["Carrier"]
-            carrier_test = Ship("Carrier", carrier_size)
-            print(f"Created from config: {carrier_test.name}, Size: {carrier_test.size}")
