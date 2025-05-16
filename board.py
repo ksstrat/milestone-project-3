@@ -54,9 +54,14 @@ class Board:
 
         for r_coord, c_coord in coordinates:
             if not (0 <= r_coord < self.size and 0 <= c_coord < self.size):
-                print("Error: Ship pacement is outside of the playboard!")
+                print("Error: Ship placement is outside of the playboard!")
                 return False
-
+            
+        for r_coord, c_coord in coordinates:
+            if self.grid[r_coord][c_coord] != '~':
+                print("Error: Ship overlaps with another!")
+                return False
+        
         for r_coord, c_coord in coordinates:
             self.grid[r_coord][c_coord] = 'S'
 
@@ -120,3 +125,29 @@ if __name__ == '__main__':
     else:
         print("Failed to place PatrolOrientFail due to invalid orientation.")
     test_board.display()
+
+    # Board restet for overlapping test)
+    print("\n--- Testing Overlap ---")
+    initial_board_overlap_test = Board()  # New Playboard for overlapping test
+    ship_alpha = Ship("Alpha", 3)
+    print("Placing Ship Alpha at (1,1) horizontally...")
+    initial_board_overlap_test.place_ship(ship_alpha, 1, 1, 'h')  # (1,1), (1,2), (1,3)
+    initial_board_overlap_test.display()
+
+    # Test 6: Try to Overlap
+    print("\nTrying to place Ship Bravo at (1,2) horizontally (should overlap Alpha and fail)...")
+    ship_bravo_overlap = Ship("BravoOverlap", 3)
+    if initial_board_overlap_test.place_ship(ship_bravo_overlap, 1, 2, 'h'):  # (1,2), (1,3), (1,4)
+        print("Ship BravoOverlap placed (ERROR - SHOULD HAVE FAILED DUE TO OVERLAP).")
+    else:
+        print("Failed to place Ship BravoOverlap as expected (overlap).")
+    initial_board_overlap_test.display()
+
+    # Test 7: Try to set ship on another coordinate
+    print("\nPlacing Ship Charlie at (3,3) vertically (should succeed)...")
+    ship_charlie_valid = Ship("CharlieValid", 2)
+    if initial_board_overlap_test.place_ship(ship_charlie_valid, 3, 3, 'v'):
+        print("Ship CharlieValid placed successfully.")
+    else:
+        print("Failed to place Ship CharlieValid (UNEXPECTED FAILURE).")
+    initial_board_overlap_test.display()
