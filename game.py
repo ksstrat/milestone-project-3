@@ -283,9 +283,25 @@ class Game:
                     coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
                     print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
 
-                    # Here will follow the shot evaluation
+                    shot_result_on_grid = self.computer_board.receive_shot(r, c)
+
+                    if shot_result_on_grid == "hit":
+                        print("> HIT! <")
+                        for comp_ship in self.computer_fleet:
+                            if (r, c) in comp_ship.coordinates:
+                                comp_ship.take_hit()
+                                if comp_ship.is_sunk:
+                                    print(f"! Enemy {comp_ship.name} has been sunk !")
+                                break
+                    elif shot_result_on_grid == "miss":
+                        print("> MISS! <")
+                    else:
+                        print("An unexpected error occurred with your shot.")
+
                     # Here will follow computers turn
                     # Here will be checked who whins
+
+                    
                     print("\n(Game round ends here for now after player's shot)")
                     game_is_running = False
 
