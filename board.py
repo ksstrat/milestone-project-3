@@ -1,3 +1,6 @@
+from ship import Ship
+
+
 class Board:
     """
     Represents the 10x10 game board for Battleship.
@@ -31,7 +34,89 @@ class Board:
         print()
 
 
+    def place_ship(self, ship_to_place, start_row, start_col, orientation):
+        """
+        Place a ship on the board if the placement is valid.
+        Updates the ship's coordinates if successfully placed.
+        """
+        ship_size = ship_to_place.size
+        coordinates = []
+
+        if orientation.lower() == 'h':
+            for i in range(ship_size):
+                coordinates.append((start_row, start_col + i))
+        elif orientation.lower() == 'v':
+            for i in range(ship_size):
+                coordinates.append((start_row + i, start_col))
+        else:
+            print("Error: Invalid orientation!")
+            return False
+
+        for r_coord, c_coord in coordinates:
+            if not (0 <= r_coord < self.size and 0 <= c_coord < self.size):
+                print("Error: Ship pacement is outside of the playboard!")
+                return False
+
+        for r_coord, c_coord in coordinates:
+            self.grid[r_coord][c_coord] = 'S'
+
+        ship_to_place.set_coordinates(coordinates)
+
+        return True
+
+
 if __name__ == '__main__':
     test_board = Board()
-    print("Board module test - display method:")
+    
+    # Test Ship
+    submarine = Ship("TestSub", 3)
+    patrol = Ship("TestPatrol", 2)
+    invalid_ship = Ship("TooLong", 11)  # To Long for Playboard
+
+    print("Initial board:")
+    test_board.display()
+
+    # Test 1: valid horizontal placement
+    print("\nPlacing Test Ship 1 horizontally at (0,0)...")
+    if test_board.place_ship(submarine, 0, 0, 'H'):
+        print("Test Ship 1 placed successfully.")
+        print(f"Test Ship 1 coordinates: {submarine.coordinates}")
+    else:
+        print("Failed to place Test Ship 1.")
+    test_board.display()
+
+    # Test 2: valid vertical placement
+    print("\nPlacing Test Ship 2 vertically at (2,2)...")
+    if test_board.place_ship(patrol, 2, 2, 'V'):
+        print("Test Ship 2 placed successfully.")
+        print(f"Test Ship 2 coordinates: {patrol.coordinates}")
+    else:
+        print("Failed to place Test Ship 2.")
+    test_board.display()
+
+    # Test 3: Invalid horizontal placement
+    print("\nTrying to place Test Ship horizontally at (0,8)... (should fail)")
+    submarine_test_fail = Ship("SubmarineFail", 3) 
+    if test_board.place_ship(submarine_test_fail, 0, 8, 'H'):  # 0,8 ; 0,9 ; 0,10 (out)
+        print("SubmarineFail placed successfully (ERROR - SHOULD FAIL).")
+    else:
+        print("Failed to place SubmarineFail as expected.")
+    test_board.display()
+
+    # Test 4: invalid vertical placement
+    print("\nTrying to place TestPatrol vertically at (9,0)... (should fail)")
+    patrol_test_fail = Ship("PatrolFail", 2)
+    if test_board.place_ship(patrol_test_fail, 9, 0, 'V'):  # 9,0 ; 10,0 (out)
+        print("PatrolFail placed successfully (ERROR - SHOULD FAIL).")
+    else:
+        print("Failed to place PatrolFail as expected.")
+    test_board.display()
+
+    # Test 5: invalid orientation
+    print("\nTrying to place TestPatrol with invalid orientation 'X'...")
+    patrol_orient_fail = Ship("PatrolOrientFail", 2)
+    if test_board.place_ship(patrol_orient_fail, 5, 5, 'X'):
+        print("PatrolOrientFail placed successfully (ERROR - SHOULD FAIL).")
+    else:
+        print("Failed to place PatrolOrientFail due to invalid orientation.")
     test_board.display()
