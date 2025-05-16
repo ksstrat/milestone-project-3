@@ -116,8 +116,14 @@ class Game:
             else:
                 print("Invalid orientation. Please enter 'h' or 'v'.")
 
-        print(f"DEBUG: Input for {ship_to_place.name}: Start at ({start_row},{start_col}), Orientation: {orientation_input.upper()}")
-        return start_row, start_col, orientation_input
+        placed_on_board_successfully = self.player_board.place_ship(
+            ship_to_place, start_row, start_col, orientation_input
+        )
+
+        if placed_on_board_successfully:
+            print(f"{ship_to_place.name} placed successfully!")
+        else:
+            print(f"Colud not place {ship_to_place.name} there. Please try again!")
 
 
     def show_start_screen(self):
@@ -217,20 +223,11 @@ class Game:
                     self.player_board.display()
                 else:
                     print("\nManual ship placement selected.")
-                    all_player_ships_input_gathered = True
                     for player_ship in self.player_fleet:
-                        placement_details = self._manually_place_ship(player_ship)
-                        if placement_details is None:
-                            print(f"Input for {player_ship.name} could not be completed")
-                            all_player_ships_input_gathered = False
-                            break
-
-                    if all_player_ships_input_gathered:
-                        print("\nAll ships placement data gathered.")
-                        print("Your board:")
-                        self.player_board.display()
-                    else:
-                        print("Manual placement was not completed")
+                        self._manually_place_ship(player_ship)
+                    print("\nAll your ships have been placed!")
+                    print("Your board:")
+                    self.player_board.display()
 
                 # Implement main game loop pending
                 break
