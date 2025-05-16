@@ -161,6 +161,15 @@ class Game:
         elif shot_result_on_grid == "miss":
             print("> Enemy MISSED! <")
 
+    def _all_ships_sunk(self, fleet):
+        """
+        Checks if all ships in the given fleet are sunk.
+        """
+        for ship in fleet:
+            if not ship.is_sunk:
+                return False
+        return True
+
     def show_start_screen(self):
         """
         Displays the start screen and gets the user's initial choice.
@@ -273,6 +282,17 @@ class Game:
                 continue
 
             elif menu_choice == "s":
+                self.player_board = Board()
+                self.computer_board = Board()
+                self.player_fleet = []
+                self.computer_fleet = []
+                for name, size in Ship.ALL_SHIPS.items():
+                    self.player_fleet.append(Ship(name, size))
+                    self.computer_fleet.append(Ship(name, size))
+
+                self._setup_computer_board()
+                self.current_player = "player"
+
                 self.get_player_name()
                 self.get_ship_placement_choice()
 
@@ -319,18 +339,27 @@ class Game:
                         elif shot_result_on_grid == "miss":
                             print("> MISS! <")
 
+                        if self._all_ships_sunk(self.computer_fleet):
+                            print(f"\n! We have won the battle, {self.player_name}! YOU WIN! !")
+                            print("You have sunk all enemy ships!")
+                            print("Final chart:")
+                            self.computer_board.display()
+                            game_is_running = False
+
                         if game_is_running:
                             self.current_player = "computer"
 
                     elif self.current_player == "computer":
                         self._computer_take_shot()
 
+                        if self._all_ships_sunk(self.player_fleet):
+                            print("\n! OUR FLEET IS GONE! The enemy wins this battle. !")
+                            print("Final chart:")
+                            self.player_board.display()
+                            game_is_running = False
+
                         if game_is_running:
                             self.current_player = "player"
-
-                    # Here will be checked who whins
-                    # For the moment, this game wont end,
-                    # because winning condition is missing.
 
                 print("\n--- Game Over ---")
                 continue
