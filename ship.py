@@ -12,7 +12,6 @@ class Ship:
         "Patrol Boat": 2
     }
 
-
     def __init__(self, name, size):
         """
         Initializing new ship.
@@ -22,7 +21,6 @@ class Ship:
         self.hits = 0
         self.is_sunk = False
         self.coordinates = []
-
 
     def take_hit(self):
         """
