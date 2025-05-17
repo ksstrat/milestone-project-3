@@ -52,7 +52,7 @@ class Board:
         # Line for spacing
         print()
 
-    def place_ship(self, ship_to_place, start_row, start_col, orientation):
+    def place_ship(self, ship_to_place, start_row, start_col, orientation, show_error_message):
         """
         Place a ship on the board if the placement is valid.
         Updates the ship's coordinates if successfully placed.
@@ -67,17 +67,20 @@ class Board:
             for i in range(ship_size):
                 coordinates.append((start_row + i, start_col))
         else:
-            print("Error: Invalid orientation!")
+            if show_error_message:
+                print("Error: Invalid orientation!")
             return False
 
         for r_coord, c_coord in coordinates:
             if not (0 <= r_coord < self.size and 0 <= c_coord < self.size):
-                print("Error: Ship placement is outside of the playboard!")
+                if show_error_message:
+                    print("Error: Ship placement is outside of the playboard!")
                 return False
 
         for r_coord, c_coord in coordinates:
             if self.grid[r_coord][c_coord] != '~':
-                print("Error: Ship overlaps with another!")
+                if show_error_message:
+                    print("Error: Ship overlaps with another!")
                 return False
 
         for r_coord, c_coord in coordinates:
