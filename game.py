@@ -120,7 +120,7 @@ class Game:
                     print("Invalid orientation. Please enter 'h' or 'v'.")
 
             placed_on_board_successfully = self.player_board.place_ship(
-                ship_to_place, start_row, start_col, orientation_input
+                ship_to_place, start_row, start_col, orientation_input, show_error_message=True
             )
 
             if placed_on_board_successfully:
