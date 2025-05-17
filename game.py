@@ -101,23 +101,23 @@ class Game:
             start_row, start_col, orientation_input = -1, -1, ''
 
             while True:
-                coord_input = input(f"Enter start coordinate (e.g., A1, J10) for your {ship_to_place.name}: ").strip()
+                coord_input = input(f"Command us start coordinate (e.g., A1, J10) for our {ship_to_place.name}: ").strip()
                 if not coord_input:
-                    print("Input cannot be empty.")
+                    print("We need coordinates! Ready to receive new orders.")
                     continue
                 parsed_coords = self._parse_coordinate_input(coord_input)
                 if parsed_coords:
                     start_row, start_col = parsed_coords
                     break
                 else:
-                    print("Invalid coordinate format. Please use a letter (A-J) followed by a number (1-10).")
+                    print("We can't execute this manoeuvre captain! Please command us a letter (A-J) followed by a number (1-10).")
 
             while True:
-                orientation_input = input(f"Enter orientation for {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
+                orientation_input = input(f"Command us orientation for our {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
                 if orientation_input in ['h', 'v']:
                     break
                 else:
-                    print("Invalid orientation. Please enter 'h' or 'v'.")
+                    print("We can't execute this manoeuvre captain! Please command us 'h' or 'v'.")
 
             placed_on_board_successfully = self.player_board.place_ship(
                 ship_to_place, start_row, start_col, orientation_input, show_error_message=True
@@ -126,7 +126,7 @@ class Game:
             if placed_on_board_successfully:
                 print(f"{ship_to_place.name} has received command!")
             else:
-                print(f"{ship_to_place.name} did not understand the command. Please try again!")
+                print("We can't execute this manoeuvre captain! Ready to receive new orders")
 
     def _computer_take_shot(self):
         """
