@@ -12,7 +12,6 @@ class Board:
         self.row_labels = "ABCDEFGHIJ"
         self.col_labels = [str(i) for i in range(1, self.size + 1)]
 
-
     def display(self):
         """
         Prints the current state of the board to the console,
@@ -29,7 +28,6 @@ class Board:
             print(f"{row_label} {row_str}")
         # Line for spacing
         print()
-
 
     def display_radar_view(self):
         """
@@ -53,7 +51,6 @@ class Board:
             print(f"{row_label} {row_str}")
         # Line for spacing
         print()
-
 
     def place_ship(self, ship_to_place, start_row, start_col, orientation):
         """
@@ -89,7 +86,6 @@ class Board:
         ship_to_place.set_coordinates(coordinates)
 
         return True
-
 
     def receive_shot(self, row, col):
         """
