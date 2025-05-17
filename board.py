@@ -93,7 +93,6 @@ class Board:
         Updates the grid cell to 'x' for a hit, 'o' for a miss.
         """
         if not (0 <= row < self.size and 0 <= col < self.size):
-            print("DEBUG: Shot out of bounds in receive_shot - should not happen if input is validated.")
             return None
 
         current_cell_value = self.grid[row][col]
@@ -107,5 +106,4 @@ class Board:
         elif current_cell_value == 'x' or current_cell_value == 'o':
             return "already_shot"
         else:
-            print(f"DEBUG: Unknown cell value '{current_cell_value}' at ({row},{col}) in receive_shot.")
             return None
