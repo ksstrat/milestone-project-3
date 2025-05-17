@@ -52,7 +52,7 @@ class Board:
         # Line for spacing
         print()
 
-    def place_ship(self, ship_to_place, start_row, start_col, orientation, show_error_message):
+    def place_ship(self, ship_to_place, start_row, start_col, orientation, show_error_message=False):
         """
         Place a ship on the board if the placement is valid.
         Updates the ship's coordinates if successfully placed.
