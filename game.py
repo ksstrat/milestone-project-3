@@ -138,6 +138,7 @@ class Game:
         Processes the shot and provides feedback.
         """
         print("\n--- Enemy's Turn ---")
+        print()
         time.sleep(1)
         board_size = self.player_board.size
         valid_shot_found = False
