@@ -45,6 +45,7 @@ class Game:
         spacing_between_boards = " " * 5
 
         print(f"\n---! Captain {self.player_name}'s Turn !---")
+        print()
 
         print(f"{player_board_title.center(single_board_display_width)}{spacing_between_boards}{computer_board_title.center(single_board_display_width)}")
 
@@ -360,17 +361,18 @@ class Game:
 
                 while game_is_running:
                     if self.current_player == "player":
-                        print(f"\n----! Captain {self.player_name}'s Turn !---")
-                        print("\nOur Status:")
-                        self.player_board.display()
-                        print("\nRadar View:")
-                        self.computer_board.display_radar_view()
+                        #  print(f"\n----! Captain {self.player_name}'s Turn !---")
+                        #  print("\nOur Status:")
+                        #  self.player_board.display()
+                        #  print("\nRadar View:")
+                        #  self.computer_board.display_radar_view()
+                        self._display_boards_side_by_side()
 
                         shot_coords = self._get_player_shot_coordinate()
                         r, c = shot_coords
                         coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
-                        time.sleep(1.5)
                         print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
+                        time.sleep(1.5)
 
                         shot_result_on_grid = self.computer_board.receive_shot(r, c)
                         if shot_result_on_grid == "hit":
