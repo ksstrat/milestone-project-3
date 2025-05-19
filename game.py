@@ -1,6 +1,7 @@
 from board import Board
 from ship import Ship
 import random
+import time
 
 
 class Game:
@@ -125,8 +126,10 @@ class Game:
 
             if placed_on_board_successfully:
                 print(f"{ship_to_place.name} has received command!")
+                time.sleep(1.5)
             else:
                 print("We can't execute this manoeuvre captain! Ready to receive new orders")
+                time.sleep(1.5)
 
     def _computer_take_shot(self):
         """
