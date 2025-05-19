@@ -138,6 +138,7 @@ class Game:
         Processes the shot and provides feedback.
         """
         print("\n--- Enemy's Turn ---")
+        time.sleep(1)
         board_size = self.player_board.size
         valid_shot_found = False
         shot_row, shot_col = -1, -1
@@ -150,19 +151,23 @@ class Game:
 
         coord_display_str = f"{self.player_board.row_labels[shot_row]}{self.player_board.col_labels[shot_col]}"
         print(f"Enemy fires at {coord_display_str}...")
+        time.sleep(1.5)
 
         shot_result_on_grid = self.player_board.receive_shot(shot_row, shot_col)
 
         if shot_result_on_grid == "hit":
             print("> Enemy HIT your ship! <")
+            time.sleep(1.5)
             for player_ship in self.player_fleet:
                 if (shot_row, shot_col) in player_ship.coordinates:
                     player_ship.take_hit()
                     if player_ship.is_sunk:
                         print(f"!!! Enemy sank your {player_ship.name} !!!")
+                        time.sleep(1.5)
                     break
         elif shot_result_on_grid == "miss":
             print("> Enemy MISSED! <")
+            time.sleep(1.5)
 
     def _all_ships_sunk(self, fleet):
         """
