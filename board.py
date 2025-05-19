@@ -24,15 +24,27 @@ class Board:
         """
         Prints the current state of the board to the console,
         including row and column labels.
+        'S' for ships, 'x' for hits, 'o' for misses, '~' for water.
         """
         # Line for spacing
         print()
         header = "  " + " ".join(self.col_labels)
         print(header)
-
         for i in range(self.size):
             row_label = self.row_labels[i]
-            row_str = " ".join(str(cell) for cell in self.grid[i])
+            row_display_elements = []
+            for cell_value in self.grid[i]:
+                if cell_value == 'S':
+                    row_display_elements.append(f"{Colors.grey_color}{cell_value}{Colors.default_color}")
+                elif cell_value == 'x':
+                    row_display_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
+                elif cell_value == 'o':
+                    row_display_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
+                elif cell_value == '~':
+                    row_display_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
+                else:
+                    row_display_elements.append(str(cell_value))
+            row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
         # Line for spacing
         print()
@@ -52,7 +64,13 @@ class Board:
             row_display_elements = []
             for cell_value in self.grid[i]:
                 if cell_value == 'S':
-                    row_display_elements.append('~')
+                    row_display_elements.append(f"{Colors.blue_color}~{Colors.default_color}")
+                elif cell_value == 'x':
+                    row_display_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
+                elif cell_value == 'o':
+                    row_display_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
+                elif cell_value == '~':
+                    row_display_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
                 else:
                     row_display_elements.append(str(cell_value))
             row_str = " ".join(row_display_elements)
@@ -118,9 +136,3 @@ class Board:
             return "already_shot"
         else:
             return None
-
-
-if __name__ == '__main__':
-    # Testing Color Constants
-    print(f"This should be blue: {Colors.blue_color}BLUE TEXT{Colors.default_color} (default text again)")
-    print(f"This should be red: {Colors.red_color}RED TEXT{Colors.default_color} (default text again)")
