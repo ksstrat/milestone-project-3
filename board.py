@@ -1,3 +1,11 @@
+class Colors:
+    blue_color = '\033[94m'
+    grey_color = '\033[90m'
+    red_color = '\033[91m'
+    cyan_color = '\033[96m'
+    default_color = '\033[0m'
+
+
 class Board:
     """
     Represents the 10x10 game board for Battleship.
@@ -110,3 +118,9 @@ class Board:
             return "already_shot"
         else:
             return None
+
+
+if __name__ == '__main__':
+    # Testing Color Constants
+    print(f"This should be blue: {Colors.blue_color}BLUE TEXT{Colors.default_color} (default text again)")
+    print(f"This should be red: {Colors.red_color}RED TEXT{Colors.default_color} (default text again)")
