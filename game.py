@@ -319,12 +319,13 @@ class Game:
                     print("This is our nautical chart:")
                     self.player_board.display()
 
-                print("\n--- Enemy in Range! ---")
+                print("\n---! Enemy in Range !---")
+                time.sleep(1)
                 game_is_running = True
 
                 while game_is_running:
                     if self.current_player == "player":
-                        print(f"\n------- Captain {self.player_name}'s Turn -------")
+                        print(f"\n----! Captain {self.player_name}'s Turn !---")
                         print("\nOur Status:")
                         self.player_board.display()
                         print("\nRadar View:")
@@ -333,23 +334,28 @@ class Game:
                         shot_coords = self._get_player_shot_coordinate()
                         r, c = shot_coords
                         coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
+                        time.sleep(1.5)
                         print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
 
                         shot_result_on_grid = self.computer_board.receive_shot(r, c)
                         if shot_result_on_grid == "hit":
                             print("> HIT! <")
+                            time.sleep(1.5)
                             for comp_ship in self.computer_fleet:
                                 if (r, c) in comp_ship.coordinates:
                                     comp_ship.take_hit()
                                     if comp_ship.is_sunk:
                                         print(f"! Enemy {comp_ship.name} has been sunk !")
+                                        time.sleep(1.5)
                                     break
                         elif shot_result_on_grid == "miss":
                             print("> MISS! <")
+                            time.sleep(1.5)
 
                         if self._all_ships_sunk(self.computer_fleet):
                             print(f"\n! We have won the battle, {self.player_name}! YOU WIN! !")
                             print("You have sunk all enemy ships!")
+                            time.sleep(1)
                             print("Final chart:")
                             self.computer_board.display()
                             game_is_running = False
@@ -362,6 +368,7 @@ class Game:
 
                         if self._all_ships_sunk(self.player_fleet):
                             print("\n! OUR FLEET IS GONE! The enemy wins this battle. !")
+                            time.sleep(1)
                             print("Final chart:")
                             self.player_board.display()
                             game_is_running = False
