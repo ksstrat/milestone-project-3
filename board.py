@@ -26,8 +26,7 @@ class Board:
         including row and column labels.
         'S' for ships, 'x' for hits, 'o' for misses, '~' for water.
         """
-        # Line for spacing
-        print()
+        print()  # Empty print for spacing
         header = "  " + " ".join(self.col_labels)
         print(header)
         for i in range(self.size):
@@ -46,7 +45,6 @@ class Board:
                     row_display_elements.append(str(cell_value))
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
-        # Line for spacing
         print()
 
     def display_radar_view(self):
@@ -54,7 +52,6 @@ class Board:
         Prints the board from radar view,
         showing water (~), miss (o) and hits (x)
         """
-        # Line for spacing
         print()
         header = "  " + " ".join(self.col_labels)
         print(header)
@@ -75,7 +72,6 @@ class Board:
                     row_display_elements.append(str(cell_value))
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
-        # Line for spacing
         print()
 
     def place_ship(self, ship_to_place, start_row, start_col, orientation, show_error_message=False):
