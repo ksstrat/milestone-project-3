@@ -29,6 +29,40 @@ class Game:
 
         self.current_player = "player"
 
+    def _display_boards_side_by_side(self):
+        """
+        Displays the player's board and the computer's radar view side-by-side.
+        Utilizes the get_display_elements() method from the Board class.
+        """
+        player_board_title = "OUR STATUS"
+        computer_board_title = "RADAR VIEW"
+
+        col_numbers_str = " ".join(self.player_board.col_labels)
+        col_numbers_width = len(col_numbers_str)
+
+        single_board_display_width = 2 + col_numbers_width
+
+        spacing_between_boards = " " * 5
+
+        print(f"\n---! Captain {self.player_name}'s Turn !---")
+
+        print(f"{player_board_title.center(single_board_display_width)}{spacing_between_boards}{computer_board_title.center(single_board_display_width)}")
+
+        col_header_segment_str = "  " + col_numbers_str
+        print(f"{col_header_segment_str}{spacing_between_boards}{col_header_segment_str}")
+
+        for i in range(self.player_board.size):
+            row_label = self.player_board.row_labels[i]
+
+            player_row_elements = self.player_board.get_display_elements(i, for_radar_view=False)
+            computer_row_elements = self.computer_board.get_display_elements(i, for_radar_view=True)
+
+            player_row_data_str = " ".join(player_row_elements)
+            computer_row_data_str = " ".join(computer_row_elements)
+
+            print(f"{row_label} {player_row_data_str.ljust(col_numbers_width)}{spacing_between_boards}{row_label} {computer_row_data_str.ljust(col_numbers_width)}")
+        print()
+
     def _place_ships_randomly(self, fleet_to_place, target_board):
         """
         Places all ship from the given fleet randomly on the target board.
