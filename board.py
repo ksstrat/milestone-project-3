@@ -20,6 +20,29 @@ class Board:
         self.row_labels = "ABCDEFGHIJ"
         self.col_labels = [str(i) for i in range(1, self.size + 1)]
 
+    def get_display_elements(self, row_index, for_radar_view=False):
+        """
+        Generates a list of displayable (colored) string elements for a given row.
+        """
+        row_elements = []
+        if not (0 <= row_index < self.size):
+            return [" " for _ in range(self.size)]
+
+        for cell_value in self.grid[row_index]:
+            if for_radar_view and cell_value == 'S':
+                row_elements.append(f"{Colors.blue_color}~{Colors.default_color}")
+            elif cell_value == 'S':
+                row_elements.append(f"{Colors.grey_color}{cell_value}{Colors.default_color}")
+            elif cell_value == 'x':
+                row_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
+            elif cell_value == 'o':
+                row_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
+            elif cell_value == '~':
+                row_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
+            else:
+                row_elements.append(str(cell_value))
+        return row_elements
+
     def display(self):
         """
         Prints the current state of the board to the console,
@@ -32,17 +55,7 @@ class Board:
         for i in range(self.size):
             row_label = self.row_labels[i]
             row_display_elements = []
-            for cell_value in self.grid[i]:
-                if cell_value == 'S':
-                    row_display_elements.append(f"{Colors.grey_color}{cell_value}{Colors.default_color}")
-                elif cell_value == 'x':
-                    row_display_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
-                elif cell_value == 'o':
-                    row_display_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
-                elif cell_value == '~':
-                    row_display_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
-                else:
-                    row_display_elements.append(str(cell_value))
+            row_display_elements = self.get_display_elements(i, for_radar_view=False)
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
         print()
@@ -59,17 +72,7 @@ class Board:
         for i in range(self.size):
             row_label = self.row_labels[i]
             row_display_elements = []
-            for cell_value in self.grid[i]:
-                if cell_value == 'S':
-                    row_display_elements.append(f"{Colors.blue_color}~{Colors.default_color}")
-                elif cell_value == 'x':
-                    row_display_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
-                elif cell_value == 'o':
-                    row_display_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
-                elif cell_value == '~':
-                    row_display_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
-                else:
-                    row_display_elements.append(str(cell_value))
+            row_display_elements = self.get_display_elements(i, for_radar_view=True)
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
         print()
