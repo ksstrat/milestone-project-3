@@ -221,7 +221,8 @@ class Game:
             shot_row, shot_col)
 
         if shot_result_on_grid == "hit":
-            print("> Enemy HIT your ship! <")
+            print(f"{Colors.red_color}> Enemy HIT your ship! <"
+                  f"{Colors.default_color}")
             # time.sleep(1.5)
             for player_ship in self.player_fleet:
                 if (shot_row, shot_col) in player_ship.coordinates:
@@ -231,7 +232,8 @@ class Game:
                         # time.sleep(1.5)
                     break
         elif shot_result_on_grid == "miss":
-            print("> Enemy MISSED! <")
+            print(f"{Colors.green_color}> Enemy MISSED! <"
+                  f"{Colors.default_color}")
             # time.sleep(1.5)
 
     def _all_ships_sunk(self, fleet):
@@ -423,7 +425,8 @@ class Game:
                         shot_result_on_grid = (
                             self.computer_board.receive_shot(r, c))
                         if shot_result_on_grid == "hit":
-                            print("> HIT! <")
+                            print(f"{Colors.green_color}> HIT! <"
+                                  f"{Colors.default_color}")
                             # time.sleep(1.5)
                             for comp_ship in self.computer_fleet:
                                 if (r, c) in comp_ship.coordinates:
@@ -434,13 +437,16 @@ class Game:
                                         # time.sleep(1.5)
                                     break
                         elif shot_result_on_grid == "miss":
-                            print("> MISS! <")
+                            print(f"{Colors.red_color}> MISSED! <"
+                                  f"{Colors.default_color}")
                             # time.sleep(1.5)
 
                         if self._all_ships_sunk(self.computer_fleet):
-                            print(f"\n! We have won the battle, Captain "
-                                  f"{self.player_name}! YOU WIN! !")
-                            print("You have sunk all enemy ships!")
+                            print("\nYou have sunk all enemy ships...")
+                            print(f"We have won the battle, Captain "
+                                  f"{self.player_name}!")
+                            print(f"\n{Colors.yellow_color}**YOU WIN!**"
+                                  f"{Colors.default_color}")
                             # time.sleep(1)
                             print("Final chart:")
                             self.computer_board.display()
@@ -454,7 +460,9 @@ class Game:
 
                         if self._all_ships_sunk(self.player_fleet):
                             print("\n! OUR FLEET IS GONE! The enemy wins this "
-                                  "battle. !")
+                                  "battle...")
+                            print(f"\n{Colors.red_color}**YOU LOSE!**"
+                                  f"{Colors.default_color}")
                             # time.sleep(1)
                             print("Final chart:")
                             self.player_board.display()
@@ -463,7 +471,9 @@ class Game:
                         if game_is_running:
                             self.current_player = "player"
 
-                print("\n--- Game Over ---")
+                print(f"\n{Colors.green_color}---! Game Over !---")
+                print(f"Would you like to play again?"
+                      f"{Colors.default_color}\n")
                 continue
 
 
