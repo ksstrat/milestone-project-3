@@ -1,6 +1,6 @@
-from board import Board
-from ship import Ship
-from board import Colors
+from classes.board import Board
+from classes.ship import Ship
+from classes.board import Colors
 import random
 import time
 
