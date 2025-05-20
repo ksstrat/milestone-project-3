@@ -42,7 +42,7 @@ class Game:
         col_numbers_str = " ".join(self.player_board.col_labels)
         col_numbers_width = len(col_numbers_str)
 
-        single_board_display_width = 2 + col_numbers_width
+        single_board_display_width = 1 + col_numbers_width
 
         spacing_between_boards = " " * 25
 
