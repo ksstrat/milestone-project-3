@@ -7,7 +7,8 @@ import time
 
 class Game:
     """
-    Manages the overall Battleship game flow, including setup, turns, and game state.
+    Manages the overall Battleship game flow,
+    including setup, turns, and game state.
     """
     def __init__(self):
         """
@@ -45,13 +46,17 @@ class Game:
 
         spacing_between_boards = " " * 25
 
-        print(f"\n{Colors.grey_color}---! Captain {self.player_name}'s Turn !{Colors.default_color}---")
+        print(f"\n{Colors.grey_color}---! Captain {self.player_name}'s Turn !"
+              f"{Colors.default_color}---")
         print()
 
-        print(f"{player_board_title.center(single_board_display_width)}{spacing_between_boards}{computer_board_title.center(single_board_display_width)}")
+        print(f"{player_board_title.center(single_board_display_width)}"
+              f"{spacing_between_boards}{computer_board_title.center(
+                  single_board_display_width)}")
 
         col_header_segment_str = " " + col_numbers_str
-        print(f"{col_header_segment_str}{spacing_between_boards}{col_header_segment_str}")
+        print(f"{col_header_segment_str}{spacing_between_boards}"
+              f"{col_header_segment_str}")
 
         for i in range(self.player_board.size):
             row_label = self.player_board.row_labels[i]
@@ -62,7 +67,9 @@ class Game:
             player_row_data_str = " ".join(player_row_elements)
             computer_row_data_str = " ".join(computer_row_elements)
 
-            print(f"{row_label} {player_row_data_str.ljust(col_numbers_width)}{spacing_between_boards}{row_label} {computer_row_data_str.ljust(col_numbers_width)}")
+            print(f"{row_label} {player_row_data_str.ljust(col_numbers_width)}"
+                  f"{spacing_between_boards}{row_label} "
+                  f"{computer_row_data_str.ljust(col_numbers_width)}")
         print()
 
     def _place_ships_randomly(self, fleet_to_place, target_board):
@@ -128,7 +135,8 @@ class Game:
         Handles the input process for manually placing a ship.
         Focuses on getting and validating input.
         """
-        print(f"\nCommand your {ship_to_place.name} (Size: {ship_to_place.size}).")
+        print(f"\nCommand your {ship_to_place.name} "
+              f"(Size: {ship_to_place.size}).")
 
         placed_on_board_successfully = False
         while not placed_on_board_successfully:
@@ -138,7 +146,9 @@ class Game:
             start_row, start_col, orientation_input = -1, -1, ''
 
             while True:
-                coord_input = input(f"Command us start coordinate (e.g., A1, J10) for our {ship_to_place.name}: ").strip()
+                coord_input = input(f"Command us start coordinate "
+                                    "(e.g., A1, J10) for our "
+                                    f"{ship_to_place.name}: ").strip()
                 if not coord_input:
                     print("We need coordinates! Ready to receive new orders.")
                     continue
@@ -147,24 +157,29 @@ class Game:
                     start_row, start_col = parsed_coords
                     break
                 else:
-                    print("We can't execute this manoeuvre captain! Please command us a letter (A-J) followed by a number (1-10).")
+                    print("We can't execute this manoeuvre captain! "
+                          "Please command us a letter (A-J) "
+                          "followed by a number (1-10).")
 
             while True:
                 orientation_input = input(f"Command us orientation for our {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
                 if orientation_input in ['h', 'v']:
                     break
                 else:
-                    print("We can't execute this manoeuvre captain! Please command us 'h' or 'v'.")
+                    print("We can't execute this manoeuvre captain! "
+                          "Please command us 'h' or 'v'.")
 
             placed_on_board_successfully = self.player_board.place_ship(
-                ship_to_place, start_row, start_col, orientation_input, show_error_message=True
+                ship_to_place, start_row, start_col, orientation_input,
+                show_error_message=True
             )
 
             if placed_on_board_successfully:
                 print(f"{ship_to_place.name} has received command!")
                 time.sleep(1.5)
             else:
-                print("We can't execute this manoeuvre captain! Ready to receive new orders")
+                print("We can't execute this manoeuvre captain! "
+                      "Ready to receive new orders")
                 time.sleep(1.5)
 
     def _computer_take_shot(self):
@@ -173,7 +188,8 @@ class Game:
         Chooses a random coordinate on the player's board.
         Processes the shot and provides feedback.
         """
-        print(f"\n{Colors.red_color}---! Enemy's Turn !---{Colors.default_color}")
+        print(f"\n{Colors.red_color}---! Enemy's Turn !---"
+              f"{Colors.default_color}")
         print()
         time.sleep(1)
         board_size = self.player_board.size
@@ -302,18 +318,22 @@ class Game:
             if parsed_coords:
                 row, col = parsed_coords
                 if self.computer_board.grid[row][col] == 'x' or self.computer_board.grid[row][col] == 'o':
-                    print("We have already fired at this coordinate! Please try again.")
+                    print("We have already fired at this coordinate! "
+                          "Please try again.")
                     continue
                 else:
                     return parsed_coords
             else:
-                print("Invalid input. Please use a letter (A-J) followed by a number (1-10).")
+                print("Invalid input. Please use a letter (A-J) "
+                      "followed by a number (1-10).")
 
     def run_game(self):
         """
         Main method to manage the overall game flow.
-        Starts with the main menu and proceeds to game setup and play if chosen by the player.
-        The game loop allows the layer to take one shot before currently ending.
+        Starts with the main menu and proceeds to game setup
+        and play if chosen by the player.
+        The game loop allows the layer to take one shot
+        before currently ending.
         """
         while True:
             menu_choice = self.show_start_screen()
@@ -356,7 +376,8 @@ class Game:
                     print("This is our nautical chart:")
                     self.player_board.display()
 
-                print(f"\n{Colors.red_color}---! Enemy's in Range !---{Colors.default_color}")
+                print(f"\n{Colors.red_color}---! Enemy's in Range !---"
+                      f"{Colors.default_color}")
                 time.sleep(1)
                 game_is_running = True
 
@@ -367,7 +388,8 @@ class Game:
                         shot_coords = self._get_player_shot_coordinate()
                         r, c = shot_coords
                         coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
-                        print(f"\nCaptain {self.player_name} fires at {coord_display_str}...")
+                        print(f"\nCaptain {self.player_name} fires at "
+                              f"{coord_display_str}...")
                         time.sleep(1.5)
 
                         shot_result_on_grid = self.computer_board.receive_shot(r, c)
@@ -378,7 +400,8 @@ class Game:
                                 if (r, c) in comp_ship.coordinates:
                                     comp_ship.take_hit()
                                     if comp_ship.is_sunk:
-                                        print(f"! Enemy {comp_ship.name} has been sunk !")
+                                        print(f"! Enemy {comp_ship.name} has "
+                                              "been sunk !")
                                         time.sleep(1.5)
                                     break
                         elif shot_result_on_grid == "miss":
@@ -386,7 +409,8 @@ class Game:
                             time.sleep(1.5)
 
                         if self._all_ships_sunk(self.computer_fleet):
-                            print(f"\n! We have won the battle, Captain {self.player_name}! YOU WIN! !")
+                            print(f"\n! We have won the battle, Captain "
+                                  f"{self.player_name}! YOU WIN! !")
                             print("You have sunk all enemy ships!")
                             time.sleep(1)
                             print("Final chart:")
@@ -400,7 +424,8 @@ class Game:
                         self._computer_take_shot()
 
                         if self._all_ships_sunk(self.player_fleet):
-                            print("\n! OUR FLEET IS GONE! The enemy wins this battle. !")
+                            print("\n! OUR FLEET IS GONE! The enemy wins this "
+                                  "battle. !")
                             time.sleep(1)
                             print("Final chart:")
                             self.player_board.display()
