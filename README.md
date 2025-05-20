@@ -1,32 +1,60 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battleship
+## Overview
 
-Welcome,
+![Start Screen Screenshot](docs/screenshots/start-screen.png)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/)
 
-## Reminders
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+## Table of contents:
+1. [**Overview**](#overview)
+2. [**Planning stage**](#planning-stage)
+    * [***Target Audiences***](#target-audiences)
+    * [***User Stories***](#user-stories)
+    * [***How This will Be Accomplised***](#how-this-will-be-accomplished)
+3. [**Features**](#features)
+    * [***Welcome Screen***](#welcome-screen)
+    * [***Rules***](#rules)
+    * [***Gameplay***](#gameplay)
+    * [***Game Over***](#game-over)
+4. [**Future Improvements**](#future-improvements)
+5. [**Testing Phase**](#testing-phase)
+6. [**Libraries**](#libraries)
+7. [**Deployment**](#deployment)
+8. [**Credtis**](#credits)
 
-## Creating the Heroku app
+***
+## **Planning stage**
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### **Target Audiences**
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### **User Stories**
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### **How This Will Be Accomplished**
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+***
+## **Features**
 
-Connect your GitHub repository and deploy as normal.
+### **Welcome Screen**
 
-## Constraints
+### **Rules**
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### **Gameplay**
 
----
+### **Game Over**
 
-Happy coding!
+***
+## **Future Improvements**
+
+***
+## **Testing Phase**
+I have documented the testing processes, both during and after development, in a separate file named [TESTING.md](TESTING.md).
+
+***
+## **Libraries**
+
+***
+## **Deployment**
+
+***
+## **Credits**
