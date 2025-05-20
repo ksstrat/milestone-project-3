@@ -242,7 +242,7 @@ class Game:
             name = input("Enter your name: ")
             if name.strip():
                 self.player_name = name
-                print(f"Welcome, {self.player_name}!")
+                print(f"Welcome, Captain {self.player_name}!")
                 break
             else:
                 print("Name cannot be empty. Please enter your name.")
@@ -292,7 +292,7 @@ class Game:
         Checks if the coordinate has already been targeted.
         """
         while True:
-            coord_input = input(f"\n{self.player_name}, where should we shoot? We need coordinates! (e.g., B6)")
+            coord_input = input(f"\nCaptain {self.player_name}, where should we shoot? We need coordinates! (e.g., B6)")
             if not coord_input:
                 print("Invalid input. Please try again.")
                 continue
@@ -390,7 +390,7 @@ class Game:
                             time.sleep(1.5)
 
                         if self._all_ships_sunk(self.computer_fleet):
-                            print(f"\n! We have won the battle, {self.player_name}! YOU WIN! !")
+                            print(f"\n! We have won the battle, Captain {self.player_name}! YOU WIN! !")
                             print("You have sunk all enemy ships!")
                             time.sleep(1)
                             print("Final chart:")
