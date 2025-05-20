@@ -1,8 +1,8 @@
+import random
+import time
 from classes.board import Board
 from classes.ship import Ship
 from classes.board import Colors
-import random
-import time
 
 
 class Game:
