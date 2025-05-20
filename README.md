@@ -29,7 +29,7 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 ## **Planning stage**
 
 ### **Target Audiences**
-* Players who enjoy classic strategy board games.
+* Users who enjoy classic strategy board games.
 * Users looking for a simple, text-based game to play in a terminal environment.
 * Individuals interested in a demonstration of object-oriented programming principles in Python applied to game development.
 * Casual gamers seeking a quick and engaging single-player experience.
@@ -43,19 +43,20 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 * As a user, i just want to have a good time with Battleships!
 
 ### **How This Will Be Accomplished**
-* This game is implemented entirely in Python, utilizing an object-oriented programming (OOP) paradigm
+* This game is implemented entirely in Python, utilizing an object-oriented programming (OOP) paradigm.
 * All interactions and game display occur within the command-line terminal.
-* Once the players have entered their names, they can choose whether to start the game immediately or read the rules first.
-* Players can either place their ships on the board themselves or choose to have them distributed randomly.
-* Players receive clear visual feedback at every stage of the game.
-* If the player makes an input that is not intended, he receives clear feedback and can repeat the input.
+* Users can choose to either start the game immediately or read the rules first.
+* After selecting 'Start', the user can enter their name.
+* Users can either place their ships on the board themselves or choose to have them distributed randomly.
+* Users receive clear visual feedback at every stage of the game.
+* If the user makes an input that is not intended, he receives clear feedback and can repeat the input.
 
 ***
 ## **Features**
 
 ### **Welcome Screen**
 * Users are greeted with the start screen.
-* From here, you can:
+* From here, they can:
     * Start the game
     * Read the rules
     * Exit the game
@@ -63,33 +64,75 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 ![Start Screen Screenshot](docs/screenshots/start-screen.png)
 
 ### **Rules**
-* Here, the player is given an overview of the rules.
-* After reading, he can return to the home screen by pressing any button.
+* Here, the user is given an overview of the rules.
+* Once they have finished reading, users can return to the start screen by pressing any button.
 
 ![Rules Screen Screenshot](docs/screenshots/rules.png)
 
 ### **Gameplay**
-* When the game starts, the player is first asked for their name.
+* When the game starts, users are asked to enter their name.
 
 ![Enter Name Screenshot](docs/screenshots/enter-name.png)
 
-* The player is then given the option of either placing the ships manually or leaving the placement to chance.
+* Users are then given the option to either place the ships manually or leave it to chance.
 
-![Ship Placement Question](docs/screenshots/ship-placement-question.png)
+![Ship Placement Question Screenshot](docs/screenshots/ship-placement-question.png)
 
-* If the player chooses manual placement, they can place the ships on the playing field one by one, as they wish.
+* If the user chooses manual placement, they can place the ships on the playing field one by one and in any order.
 
-![Ship Placement](docs/screenshots/placing-ships.png)
+![Ship Placement Screenshot](docs/screenshots/placing-ships.png)
 
-* Once the orientation has been selected (horizontal or vertical), the ship is placed according to the player's choice.
+* Once the orientation has been selected (horizontal or vertical), the ship is placed according to the users choice.
 
-![Ship Placement Orientation](docs/screenshots/placing-ships-orientation.png)
+![Ship Placement Orientation Screenshot](docs/screenshots/placing-ships-orientation.png)
 
-* If a player makes an invalid entry — for example, by trying to leave the grid or put a second boat on the same field — they will see a relevant error message.
+* If a users makes an invalid entry — for example, by trying to leave the grid or put a second boat on the same field — they will see a relevant error message.
 
-![Ship Placement Invalid](docs/screenshots/placing-ships-invalid.png)
+![Ship Placement Invalid Screenshot](docs/screenshots/placing-ships-invalid.png)
+
+* Once the user has placed all their ships or selected random placement, their nautical chart will be displayed.
+    * The symbol ‘~’ represents unexplored water, while ‘S’ represents the user's own ships.
+
+![Users Nautical Chart Screenshot](docs/screenshots/ship-placement-randomly.png)
+
+* The computer then places its ships randomly on its map, after which the first turn begins.
+* The two important cards for users are displayed side by side here.
+    * To the left, the user can see their own ships and the fields shot at by the computer.
+    * On the right-hand side, the user must reveal the map by firing at individual squares.
+* The user is then prompted to select a coordinate on the map.
+
+![First Turn Screenshot](docs/screenshots/first-turn.png)
+
+* After entering their desired coordinates, the user's attack runs first, followed by the computer's.
+* It is clearly displayed whether the player has hit or missed, the same applies to the computer's turn.
+* The symbol ‘o’ means that no target was hit (only water).
+
+![Missed Shot Screenshot](docs/screenshots/missed-shot.png)
+
+* A successful hit is indicated by an ‘x’.
+    * Also a message is displayed for both hits and misses.
+
+![Successful Shot Screenshot](docs/screenshots/shot-hit.png)
+
+* If the user sinks a ship belonging to the computer, a corresponding message will be displayed.
+
+![User sinks Ship Screenshot](docs/screenshots/user-sank-ship.png)
+
+* A clear message is also displayed if the computer sinks one of the user's ships.
+
+![Computer sinks Ship Screenshot](docs/screenshots/enemy-sank-ship.png)
 
 ### **Game Over**
+
+* The game ends when either the player or the computer has sunk all of the opponent's ships.
+* A clear message indicating whether the outcome was a win or a loss is then issued.
+
+!["YOU WIN" Screenshot](docs/screenshots/won_game.png)
+
+* A "Game Over" message is then displayed and the start screen is loaded.
+* Now the user can start the game again or quit the game.
+
+![Game Over Screenshot](docs/screenshots/game-over.png)
 
 ***
 ## **Future Improvements**
