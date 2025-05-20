@@ -22,7 +22,8 @@ class Board:
 
     def get_display_elements(self, row_index, for_radar_view=False):
         """
-        Generates a list of displayable (colored) string elements for a given row.
+        Generates a list of displayable (colored)
+        string elements for a given row.
         """
         row_elements = []
         if not (0 <= row_index < self.size):
@@ -30,15 +31,20 @@ class Board:
 
         for cell_value in self.grid[row_index]:
             if for_radar_view and cell_value == 'S':
-                row_elements.append(f"{Colors.blue_color}~{Colors.default_color}")
+                row_elements.append(f"{Colors.blue_color}~"
+                                    f"{Colors.default_color}")
             elif cell_value == 'S':
-                row_elements.append(f"{Colors.grey_color}{cell_value}{Colors.default_color}")
+                row_elements.append(f"{Colors.grey_color}{cell_value}"
+                                    f"{Colors.default_color}")
             elif cell_value == 'x':
-                row_elements.append(f"{Colors.red_color}{cell_value}{Colors.default_color}")
+                row_elements.append(f"{Colors.red_color}{cell_value}"
+                                    f"{Colors.default_color}")
             elif cell_value == 'o':
-                row_elements.append(f"{Colors.cyan_color}{cell_value}{Colors.default_color}")
+                row_elements.append(f"{Colors.cyan_color}{cell_value}"
+                                    f"{Colors.default_color}")
             elif cell_value == '~':
-                row_elements.append(f"{Colors.blue_color}{cell_value}{Colors.default_color}")
+                row_elements.append(f"{Colors.blue_color}{cell_value}"
+                                    f"{Colors.default_color}")
             else:
                 row_elements.append(str(cell_value))
         return row_elements
@@ -55,7 +61,8 @@ class Board:
         for i in range(self.size):
             row_label = self.row_labels[i]
             row_display_elements = []
-            row_display_elements = self.get_display_elements(i, for_radar_view=False)
+            row_display_elements = self.get_display_elements(
+                i, for_radar_view=False)
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
         print()
@@ -72,12 +79,14 @@ class Board:
         for i in range(self.size):
             row_label = self.row_labels[i]
             row_display_elements = []
-            row_display_elements = self.get_display_elements(i, for_radar_view=True)
+            row_display_elements = self.get_display_elements(
+                i, for_radar_view=True)
             row_str = " ".join(row_display_elements)
             print(f"{row_label} {row_str}")
         print()
 
-    def place_ship(self, ship_to_place, start_row, start_col, orientation, show_error_message=False):
+    def place_ship(self, ship_to_place, start_row, start_col, orientation,
+                   show_error_message=False):
         """
         Place a ship on the board if the placement is valid.
         Updates the ship's coordinates if successfully placed.
