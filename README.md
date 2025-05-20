@@ -54,10 +54,32 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 ## **Features**
 
 ### **Welcome Screen**
+* Users are greeted with the start screen.
+* From here, you can:
+    * Start the game
+    * Read the rules
+    * Exit the game
+
+![Start Screen Screenshot](docs/screenshots/start-screen.png)
 
 ### **Rules**
+* Here, the player is given an overview of the rules.
+* After reading, he can return to the home screen by pressing any button.
+
+![Rules Screen Screenshot](docs/screenshots/rules.png)
 
 ### **Gameplay**
+* When the game starts, the player is first asked for their name.
+
+![Enter Name Screenshot](docs/screenshots/enter-name.png)
+
+* The player is then given the option of either placing the ships manually or leaving the placement to chance.
+
+![Ship Placement Question](docs/screenshots/ship-placement-question.png)
+
+* If the player chooses manual placement, they can place the ships on the playing field one by one, as they wish.
+
+![Ship Placement](docs/screenshots/placing-ships.png)
 
 ### **Game Over**
 
