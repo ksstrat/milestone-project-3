@@ -81,6 +81,14 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 
 ![Ship Placement](docs/screenshots/placing-ships.png)
 
+* Once the orientation has been selected (horizontal or vertical), the ship is placed according to the player's choice.
+
+![Ship Placement Orientation](docs/screenshots/placing-ships-orientation.png)
+
+* If a player makes an invalid entry — for example, by trying to leave the grid or put a second boat on the same field — they will see a relevant error message.
+
+![Ship Placement Invalid](docs/screenshots/placing-ships-invalid.png)
+
 ### **Game Over**
 
 ***
