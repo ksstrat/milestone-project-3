@@ -1,5 +1,6 @@
 from board import Board
 from ship import Ship
+from board import Colors
 import random
 import time
 
@@ -44,7 +45,7 @@ class Game:
 
         spacing_between_boards = " " * 25
 
-        print(f"\n---! Captain {self.player_name}'s Turn !---")
+        print(f"\n{Colors.grey_color}---! Captain {self.player_name}'s Turn !{Colors.default_color}---")
         print()
 
         print(f"{player_board_title.center(single_board_display_width)}{spacing_between_boards}{computer_board_title.center(single_board_display_width)}")
@@ -172,7 +173,7 @@ class Game:
         Chooses a random coordinate on the player's board.
         Processes the shot and provides feedback.
         """
-        print("\n--- Enemy's Turn ---")
+        print(f"\n{Colors.red_color}---! Enemy's Turn !---{Colors.default_color}")
         print()
         time.sleep(1)
         board_size = self.player_board.size
@@ -292,7 +293,7 @@ class Game:
         Checks if the coordinate has already been targeted.
         """
         while True:
-            coord_input = input(f"\nCaptain {self.player_name}, where should we shoot? We need coordinates! (e.g., B6)")
+            coord_input = input(f"\nCaptain {self.player_name}, where should we shoot? We need coordinates! (e.g., B6)\n")
             if not coord_input:
                 print("Invalid input. Please try again.")
                 continue
@@ -342,9 +343,9 @@ class Game:
 
                 print("\nOur ships prepare for depature...")
                 if self.ship_placement_method == "random":
-                    print("\nOur ships will spread without a strategy!")
+                    print("\nOur ships will spread without a strategy...\n")
                     self._place_ships_randomly(self.player_fleet, self.player_board)
-                    print("Our ships have taken up random positions")
+                    print("Our ships have taken up random positions!")
                     print("\nThis is our nautical chart:")
                     self.player_board.display()
                 else:
@@ -355,23 +356,18 @@ class Game:
                     print("This is our nautical chart:")
                     self.player_board.display()
 
-                print("\n---! Enemy in Range !---")
+                print(f"\n{Colors.red_color}---! Enemy's in Range !---{Colors.default_color}")
                 time.sleep(1)
                 game_is_running = True
 
                 while game_is_running:
                     if self.current_player == "player":
-                        #  print(f"\n----! Captain {self.player_name}'s Turn !---")
-                        #  print("\nOur Status:")
-                        #  self.player_board.display()
-                        #  print("\nRadar View:")
-                        #  self.computer_board.display_radar_view()
                         self._display_boards_side_by_side()
 
                         shot_coords = self._get_player_shot_coordinate()
                         r, c = shot_coords
                         coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
-                        print(f"\nCaptain {self.player_name} fires at {coord_display_str}.")
+                        print(f"\nCaptain {self.player_name} fires at {coord_display_str}...")
                         time.sleep(1.5)
 
                         shot_result_on_grid = self.computer_board.receive_shot(r, c)
