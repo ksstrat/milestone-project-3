@@ -163,7 +163,7 @@ class Game:
                     start_row, start_col = parsed_coords
                     break
                 else:
-                    print("We can't execute this manoeuvre captain! "
+                    print("We can't execute this manoeuver captain! "
                           "Please command us a letter (A-J) "
                           "followed by a number (1-10).")
 
@@ -175,7 +175,7 @@ class Game:
                 if orientation_input in ['h', 'v']:
                     break
                 else:
-                    print("We can't execute this manoeuvre captain! "
+                    print("We can't execute this manoeuver captain! "
                           "Please command us 'h' or 'v'.")
 
             placed_on_board_successfully = self.player_board.place_ship(
@@ -187,7 +187,7 @@ class Game:
                 print(f"{ship_to_place.name} has received command!")
                 time.sleep(1)
             else:
-                print("We can't execute this manoeuvre captain! "
+                print("We can't execute this manoeuver captain! "
                       "Ready to receive new orders")
                 time.sleep(1)
 
@@ -389,7 +389,7 @@ class Game:
                 self.get_player_name()
                 self.get_ship_placement_choice()
 
-                print("\nOur ships prepare for depature...")
+                print("\nOur ships prepare for departure...")
                 if self.ship_placement_method == "random":
                     print("\nOur ships will spread without a strategy...\n")
                     self._place_ships_randomly(

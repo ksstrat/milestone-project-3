@@ -109,7 +109,7 @@ class Board:
         for r_coord, c_coord in coordinates:
             if not (0 <= r_coord < self.size and 0 <= c_coord < self.size):
                 if show_error_message:
-                    print("Error: Ship placement is outside of the playboard!")
+                    print("Error: Ship placement is outside of the chart!")
                 return False
 
         for r_coord, c_coord in coordinates:

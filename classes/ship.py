@@ -3,7 +3,7 @@ class Ship:
     Represents the ships in the game, tracking its name, size,
     number of hits taken, sunk status, and the grid coordinates it occupies.
     """
-    #  Predefined ship types with their cooresponding sizes
+    #  Predefined ship types with their corresponding sizes
     ALL_SHIPS = {
         "Carrier": 5,
         "Battleship": 4,
