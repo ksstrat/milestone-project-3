@@ -1,17 +1,24 @@
 ## Table of Contents
 * [**Testing During Development**](#testing-during-development)
     * [*Manual Testing*](#manual-testing)
+        *[*VS Code flake8](#vs-code-flake8)
     * [*Bugs and Fixes*](#bugs-and-fixes)
 * [**Post Development Testing**](#post-development-testing)
   * [**Validators**](#validators)
-      * [*Python Validation*](#)
+      * [*CI Python Linter*](#ci-python-linter)
 
 ## **Testing During Development**
 While developing, I've manually tested using the following methods:
+1. During development, I repeatedly created test prints to check the values of the methods.
+2. I have thoroughly tested all inputs and their validation.
+3. I have played through the game several times to make sure that all the functions work as intended.
+4. I asked family, friends and colleagues to test the game extensively. So far, nobody has managed to break the game.
 
+***
 ### **Manual Testing**
+***
 
-#### VS Code flake8
+#### **VS Code flake8**
 During development in VS Code, I repeatedly analysed the code with Flake8 to check for errors and ensure quality and conformity with the PEP8 style guide. The most common sources of errors during the project's implementation are listed below:
 
 1.  * ***Issue:*** 
@@ -64,4 +71,42 @@ During development in VS Code, I repeatedly analysed the code with Flake8 to che
     * ***Solution:*** 
         * The opposite of 9. Unnecessary lines removed.
 
-CI Python Linter
+***
+### **Bugs and Fixes**
+***
+
+1. * ***Issue:*** 
+        * During development, an infinite loop occurred when the player ships were set manually. The game could then no longer be played.
+    * ***Solution:*** 
+        * The problem could be solved by adding the correct loop to the '_manually_place_ship' method.
+
+2. * ***Issue:*** 
+        * Towards the end of the development, it was noticeable that the row of numbers from 1 to 10 in the radar view was slightly shifted.
+    * ***Solution:*** 
+        * The problem was that I had tried to solve the alignment with ljust, which turned out to be inaccurate and cumbersome. After changing the method to display boards side by side, the problem was solved.
+
+#### **Remaining Bugs**  
+* No Bugs remaind in the app.
+
+***
+## **Post Development Testing**
+
+### **Validators**
+
+#### **CI Python Linter**
+I have checked all my modules with CI Python Linter and no problems have occurred due to the permanent checks with flake8 during development.
+
+* run.py
+[CP Python Linter - run.py Screenshot](docs/screenshots/cipl_run_py.png)
+
+* ship.py
+[CP Python Linter - ship.py Screenshot](docs/screenshots/cipl_ship_py.png)
+
+* board.py
+[CP Python Linter - board.py Screenshot](docs/screenshots/cipl_board_py.png)
+
+* game.py
+[CP Python Linter - game.py Screenshot](docs/screenshots/cipl_game_py.png)
+
+***
+[return to README.md](README.md)

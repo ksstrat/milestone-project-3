@@ -185,6 +185,7 @@ Follow this step-by-step guide to play it locally:
 * The design is inspired by Hasbro's Battleships board game.
 * Throuhout the project, i used python 3.13.3 documentation and w3schools as primary resources for guidance and reference.
 * The YouTube channels [freecodecamp.org](https://www.youtube.com/watch?v=Ej_02ICOIgs) and [Corey Schafer](https://www.youtube.com/watch?v=ZDa-Z5JzLYM) provided me with an excellent introduction to object-oriented programming and served as a useful reference.
+* Special thanks go to my numerous beta testers, who are friends, family and relatives.
 
 
 
