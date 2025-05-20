@@ -42,14 +42,14 @@ class Game:
 
         single_board_display_width = 2 + col_numbers_width
 
-        spacing_between_boards = " " * 5
+        spacing_between_boards = " " * 25
 
         print(f"\n---! Captain {self.player_name}'s Turn !---")
         print()
 
         print(f"{player_board_title.center(single_board_display_width)}{spacing_between_boards}{computer_board_title.center(single_board_display_width)}")
 
-        col_header_segment_str = "  " + col_numbers_str
+        col_header_segment_str = " " + col_numbers_str
         print(f"{col_header_segment_str}{spacing_between_boards}{col_header_segment_str}")
 
         for i in range(self.player_board.size):
