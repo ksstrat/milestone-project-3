@@ -91,7 +91,9 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 ![Ship Placement Invalid Screenshot](docs/screenshots/placing-ships-invalid.png)
 
 * Once the user has placed all their ships or selected random placement, their nautical chart will be displayed.
-    * The symbol ‘~’ represents unexplored water, while ‘S’ represents the user's own ships.
+    * The symbol "~" represents unexplored water, while "S" represents the user's own ships.
+    * "~" is displayed in the colour blue.
+    * "S" ist displayed in the colour green.
 
 ![Users Nautical Chart Screenshot](docs/screenshots/ship-placement-randomly.png)
 
@@ -105,12 +107,13 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 
 * After entering their desired coordinates, the user's attack runs first, followed by the computer's.
 * It is clearly displayed whether the player has hit or missed, the same applies to the computer's turn.
-* The symbol ‘o’ means that no target was hit (only water).
+* The symbol "o" means that no target was hit (only water).
+    * This symbol is displayed in the colour cyan, as an additional colour indication.
 
 ![Missed Shot Screenshot](docs/screenshots/missed-shot.png)
 
-* A successful hit is indicated by an ‘x’.
-    * Also a message is displayed for both hits and misses.
+* A successful hit is indicated by an "x".
+    * Additionally, a message is displayed for both hits and misses, which are indicated by green or red colours.
 
 ![Successful Shot Screenshot](docs/screenshots/shot-hit.png)
 
@@ -136,6 +139,13 @@ Link to Heroku: [Battleship](https://msp3-battleship-a0f0482c2f33.herokuapp.com/
 
 ***
 ## **Future Improvements**
+While the current version provides a comprehensive Battleship experience, some potential features were postponed due to the project's limited timeframe.
+Future updates could include the following:
+* Advanced computer AI: Implement a "smarter" AI for the computer that will "hunt" for the rest of the ship by targeting adjacent squares after scoring a hit.
+* Variable board sizes: Allow players to select different grid dimensions.
+* Customisable fleet: You can select different ship types or quantities.
+* Sound effects: Basic sound cues for hits, misses and sinking ships. This would require either a library capable of producing sound in the terminal, or a transition to a GUI.
+* Persistent high scores: What if a scoring system were added?
 
 ***
 ## **Testing Phase**
@@ -143,6 +153,14 @@ I have documented the testing processes, both during and after development, in a
 
 ***
 ## **Libraries**
+This project utilizes Python's built-in standard libraries:
+* random: Used for:
+    * Random placement of the computer's ships.
+    * Random placement of the player's ships if selected.
+    * Random shot selection by the computer opponent.
+
+* time: Used for:
+    * Implementing time.sleep() to create timed pauses in the game flow, enhancing readability and user experience by giving the player time to process on-screen messages and board updates.
 
 ***
 ## **Deployment**
