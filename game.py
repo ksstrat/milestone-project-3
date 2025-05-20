@@ -61,8 +61,10 @@ class Game:
         for i in range(self.player_board.size):
             row_label = self.player_board.row_labels[i]
 
-            player_row_elements = self.player_board.get_display_elements(i, for_radar_view=False)
-            computer_row_elements = self.computer_board.get_display_elements(i, for_radar_view=True)
+            player_row_elements = self.player_board.get_display_elements(
+                i, for_radar_view=False)
+            computer_row_elements = self.computer_board.get_display_elements(
+                i, for_radar_view=True)
 
             player_row_data_str = " ".join(player_row_elements)
             computer_row_data_str = " ".join(computer_row_elements)
@@ -87,13 +89,16 @@ class Game:
                 if orientation == 'h':
                     max_col = board_size - ship.size
                     start_row = random.randint(0, board_size - 1)
-                    start_col = random.randint(0, max_col if max_col >= 0 else 0)
+                    start_col = random.randint(
+                        0, max_col if max_col >= 0 else 0)
                 else:
                     max_row = board_size - ship.size
-                    start_row = random.randint(0, max_row if max_row >= 0 else 0)
+                    start_row = random.randint(
+                        0, max_row if max_row >= 0 else 0)
                     start_col = random.randint(0, board_size - 1)
 
-                placed_successfully = target_board.place_ship(ship, start_row, start_col, orientation)
+                placed_successfully = target_board.place_ship(
+                    ship, start_row, start_col, orientation)
 
     def _setup_computer_board(self):
         """
@@ -162,7 +167,10 @@ class Game:
                           "followed by a number (1-10).")
 
             while True:
-                orientation_input = input(f"Command us orientation for our {ship_to_place.name} (h for horizontal, v for vertical): ").strip().lower()
+                orientation_input = input(f"Command us orientation for our "
+                                          f"{ship_to_place.name} (h for "
+                                          "horizontal, v for vertical): "
+                                          ).strip().lower()
                 if orientation_input in ['h', 'v']:
                     break
                 else:
@@ -202,11 +210,15 @@ class Game:
             if self.player_board.grid[shot_row][shot_col] not in ['x', 'o']:
                 valid_shot_found = True
 
-        coord_display_str = f"{self.player_board.row_labels[shot_row]}{self.player_board.col_labels[shot_col]}"
+        coord_display_str = (
+            f"{self.player_board.row_labels[shot_row]}"
+            f"{self.player_board.col_labels[shot_col]}"
+        )
         print(f"Enemy fires at {coord_display_str}...")
         time.sleep(1.5)
 
-        shot_result_on_grid = self.player_board.receive_shot(shot_row, shot_col)
+        shot_result_on_grid = self.player_board.receive_shot(
+            shot_row, shot_col)
 
         if shot_result_on_grid == "hit":
             print("> Enemy HIT your ship! <")
@@ -295,7 +307,8 @@ class Game:
         print("3. Each player has a fleet of 5 ships of different sizes:")
         for name, size in Ship.ALL_SHIPS.items():
             print(f" - {name} ({size} squares)")
-        print("4. Ships can be placed horizontally or vertically, but can not overlap.")
+        print("4. Ships can be placed horizontally or vertically, "
+              "but can not overlap.")
         print("5. Players take turns guessing coordinates to hit enemy ships.")
         print("6. A hit on a ship is marked 'x'.")
         print("7. A miss (shot into water) is marked 'o'.")
@@ -309,7 +322,8 @@ class Game:
         Checks if the coordinate has already been targeted.
         """
         while True:
-            coord_input = input(f"\nCaptain {self.player_name}, where should we shoot? We need coordinates! (e.g., B6)\n")
+            coord_input = input(f"\nCaptain {self.player_name}, where should "
+                                "we shoot? We need coordinates! (e.g., B6)\n")
             if not coord_input:
                 print("Invalid input. Please try again.")
                 continue
@@ -317,7 +331,10 @@ class Game:
             parsed_coords = self._parse_coordinate_input(coord_input)
             if parsed_coords:
                 row, col = parsed_coords
-                if self.computer_board.grid[row][col] == 'x' or self.computer_board.grid[row][col] == 'o':
+                if (
+                    self.computer_board.grid[row][col] == 'x'
+                    or self.computer_board.grid[row][col] == 'o'
+                ):
                     print("We have already fired at this coordinate! "
                           "Please try again.")
                     continue
@@ -364,7 +381,8 @@ class Game:
                 print("\nOur ships prepare for depature...")
                 if self.ship_placement_method == "random":
                     print("\nOur ships will spread without a strategy...\n")
-                    self._place_ships_randomly(self.player_fleet, self.player_board)
+                    self._place_ships_randomly(
+                        self.player_fleet, self.player_board)
                     print("Our ships have taken up random positions!")
                     print("\nThis is our nautical chart:")
                     self.player_board.display()
@@ -387,12 +405,15 @@ class Game:
 
                         shot_coords = self._get_player_shot_coordinate()
                         r, c = shot_coords
-                        coord_display_str = f"{self.player_board.row_labels[r]}{self.player_board.col_labels[c]}"
+                        coord_display_str = (
+                            f"{self.player_board.row_labels[r]}"
+                            f"{self.player_board.col_labels[c]}")
                         print(f"\nCaptain {self.player_name} fires at "
                               f"{coord_display_str}...")
                         time.sleep(1.5)
 
-                        shot_result_on_grid = self.computer_board.receive_shot(r, c)
+                        shot_result_on_grid = (
+                            self.computer_board.receive_shot(r, c))
                         if shot_result_on_grid == "hit":
                             print("> HIT! <")
                             time.sleep(1.5)
