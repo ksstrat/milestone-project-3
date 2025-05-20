@@ -3,6 +3,7 @@ class Colors:
     grey_color = '\033[90m'
     red_color = '\033[91m'
     cyan_color = '\033[96m'
+    yellow_color = '\033[93m'
     default_color = '\033[0m'
 
 

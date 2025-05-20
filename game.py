@@ -247,9 +247,17 @@ class Game:
         """
         Displays the start screen and gets the user's initial choice.
         """
-        print("########################")
-        print("       Battleship       ")
-        print("########################")
+        print(f"{Colors.yellow_color}"
+              "*************************************************************")
+        print("*                                                           *")
+        print("*  §§§    §§   §§§  §§§  §     §§§§   §§§  §  §  §§§  §§§   *")
+        print("*  §  §  §  §   §    §   §     §     §     §  §   §   §  §  *")
+        print("*  §§§   §§§§   §    §   §     §§§    §§   §§§§   §   §§§   *")
+        print("*  §  §  §  §   §    §   §     §        §  §  §   §   §     *")
+        print("*  §§§   §  §   §    §   §§§§  §§§§  §§§   §  §  §§§  §     *")
+        print("*                                                           *")
+        print("*************************************************************"
+              f"{Colors.default_color}")
         print("\n Welcome to Battleship!")
         print("Choose an option:")
         print(" (s) Start Game")
