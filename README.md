@@ -164,6 +164,27 @@ This project utilizes Python's built-in standard libraries:
 
 ***
 ## **Deployment**
+This project was developed using VS Code, github and heroku.
+* VS Code was used as the local development environment, with the project's corresponding GitHub repository being linked to it.
+* GitHub was used for version control and was linked to Heroku to enable automatic deployment whenever updates were made to the main branch.
+* The game was deployed via Heroku. It can be accessed via the following link: https://msp3-battleship-a0f0482c2f33.herokuapp.com/
+* The application is designed to run in a terminal environment. It is launched using the run.py script.
+
+Follow this step-by-step guide to play it locally:
+
+* Access the repository via https://github.com/ksstrat/milestone-project-3
+* Get the HTTPS URL by clicking the green "<> Code" button and copy it.
+* Open a terminal in your IDE, type "git clone" and past in the URL of the repository after it. Then press enter.
+* You have successfully cloned the repository to your system.
+* Before running the program, ensure that you have installed all the requirements listed in the 'requirements.txt' file.
 
 ***
 ## **Credits**
+* I would like to thank my mentor, Richard Wells, for his guidance and support.
+* The project drew inspiration from the Code Institute's Portfolio 3 Assessment Guide and Project Scope Video.
+* The design is inspired by Hasbro's Battleships board game.
+* Throuhout the project, i used python 3.13.3 documentation and w3schools as primary resources for guidance and reference.
+* The YouTube channels [freecodecamp.org](https://www.youtube.com/watch?v=Ej_02ICOIgs) and [Corey Schafer](https://www.youtube.com/watch?v=ZDa-Z5JzLYM) provided me with an excellent introduction to object-oriented programming and served as a useful reference.
+
+
+
