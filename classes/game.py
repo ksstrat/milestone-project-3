@@ -40,9 +40,8 @@ class Game:
         computer_board_title = "RADAR VIEW"
 
         col_numbers_str = " ".join(self.player_board.col_labels)
-        col_numbers_width = len(col_numbers_str)
 
-        single_board_display_width = 1 + col_numbers_width
+        single_board_display_width = 2 + len(col_numbers_str)
 
         spacing_between_boards = " " * 25
 
@@ -54,7 +53,7 @@ class Game:
               f"{spacing_between_boards}{computer_board_title.center(
                   single_board_display_width)}")
 
-        col_header_segment_str = " " + col_numbers_str
+        col_header_segment_str = "  " + col_numbers_str
         print(f"{col_header_segment_str}{spacing_between_boards}"
               f"{col_header_segment_str}")
 
@@ -69,9 +68,11 @@ class Game:
             player_row_data_str = " ".join(player_row_elements)
             computer_row_data_str = " ".join(computer_row_elements)
 
-            print(f"{row_label} {player_row_data_str.ljust(col_numbers_width)}"
-                  f"{spacing_between_boards}{row_label} "
-                  f"{computer_row_data_str.ljust(col_numbers_width)}")
+            player_data_to_print = player_row_data_str + " "
+            computer_data_to_print = computer_row_data_str + " "
+            
+            print(f"{row_label} {player_data_to_print}{spacing_between_boards}"
+                  f"{row_label} {computer_data_to_print}")
         print()
 
     def _place_ships_randomly(self, fleet_to_place, target_board):
