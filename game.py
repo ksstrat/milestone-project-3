@@ -46,7 +46,7 @@ class Game:
 
         spacing_between_boards = " " * 25
 
-        print(f"\n{Colors.grey_color}---! Captain {self.player_name}'s Turn !"
+        print(f"\n{Colors.green_color}---! Captain {self.player_name}'s Turn !"
               f"{Colors.default_color}---")
         print()
 

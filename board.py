@@ -1,6 +1,6 @@
 class Colors:
     blue_color = '\033[94m'
-    grey_color = '\033[90m'
+    green_color = '\033[92m'
     red_color = '\033[91m'
     cyan_color = '\033[96m'
     yellow_color = '\033[93m'
@@ -35,7 +35,7 @@ class Board:
                 row_elements.append(f"{Colors.blue_color}~"
                                     f"{Colors.default_color}")
             elif cell_value == 'S':
-                row_elements.append(f"{Colors.grey_color}{cell_value}"
+                row_elements.append(f"{Colors.green_color}{cell_value}"
                                     f"{Colors.default_color}")
             elif cell_value == 'x':
                 row_elements.append(f"{Colors.red_color}{cell_value}"
