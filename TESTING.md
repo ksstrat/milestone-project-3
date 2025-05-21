@@ -1,7 +1,7 @@
 ## Table of Contents
 * [**Testing During Development**](#testing-during-development)
     * [*Manual Testing*](#manual-testing)
-        *[*VS Code flake8](#vs-code-flake8)
+        * [*VS Code flake8](#vs-code-flake8)
     * [*Bugs and Fixes*](#bugs-and-fixes)
 * [**Post Development Testing**](#post-development-testing)
   * [**Validators**](#validators)
@@ -19,7 +19,7 @@ While developing, I've manually tested using the following methods:
 ***
 
 #### **VS Code flake8**
-During development in VS Code, I repeatedly analysed the code with Flake8 to check for errors and ensure quality and conformity with the PEP8 style guide. The most common sources of errors during the project's implementation are listed below:
+During development in VS Code, I repeatedly analyzed the code with Flake8 to check for errors and ensure quality and conformity with the PEP8 style guide. The most common sources of errors during the project's implementation are listed below:
 
 1.  * ***Issue:*** 
         * E501 line too long: Lines exceeding the recommended maximum length of 79 characters.
@@ -32,7 +32,7 @@ During development in VS Code, I repeatedly analysed the code with Flake8 to che
         * Any extra spaces at the end of lines have been removed.
 
 3.  * ***Issue:*** 
-        * E303 too many blak lines: To many blank lines between lines of code
+        * E303 too many blank lines: To many blank lines between lines of code
     * ***Solution:*** 
         * Whenever there was more than one empty line between two lines of code, these were removed.
 
@@ -52,7 +52,7 @@ During development in VS Code, I repeatedly analysed the code with Flake8 to che
         * Similar to 5. Removed the double whitespace before the operator.
 
 7.  * ***Issue:*** 
-        * E201 whitespace after '(': Another unnecessary whitepsace.
+        * E201 whitespace after '(': Another unnecessary whitespace.
     * ***Solution:*** 
         * Removed the whitespace after '('.
 
@@ -67,7 +67,7 @@ During development in VS Code, I repeatedly analysed the code with Flake8 to che
         * An empty line is added after the last line of code.
 
 10. * ***Issue:*** 
-        * W391 blankl line at end of file: A blank line after the last empty line.
+        * W391 blank line at end of file: A blank line after the last empty line.
     * ***Solution:*** 
         * The opposite of 9. Unnecessary lines removed.
 
@@ -86,7 +86,7 @@ During development in VS Code, I repeatedly analysed the code with Flake8 to che
         * The problem was that I had tried to solve the alignment with ljust, which turned out to be inaccurate and cumbersome. After changing the method to display boards side by side, the problem was solved.
 
 #### **Remaining Bugs**  
-* No Bugs remaind in the app.
+* There are no bugs remaining in the app.
 
 ***
 ## **Post Development Testing**
